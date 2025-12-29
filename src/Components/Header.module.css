@@ -1,1 +1,40 @@
+header {
+  max-width: 1400px;
+  padding: 24px 46px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
 
+.menu {
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.button {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.sign-up {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  margin-right: 24px;
+}
+
+.login {
+  border-radius: 8px;
+  font-size: bold;
+  padding: 8px 24px;
+  border: none;
+  outline: 1px solid #62853d;
+  background-color: #62853d;
+  color: #faecd5;
+  transition: all 0.3 ease;
+}
+
+.login:hover {
+  background-color: #567535;
+}
