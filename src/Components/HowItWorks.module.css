@@ -1,0 +1,64 @@
+.howItWorksSection {
+  background-color: #62853d;
+  padding: 48px 46px 105px;
+  text-align: center;
+}
+
+.sectionHeading {
+  color: #f5f5f5;
+  font-size: 40px;
+  line-height: 1;
+  font-family: Katibeh;
+  font-weight: 400;
+}
+
+.sectionTagline {
+  font-weight: 400;
+  line-height: 28px;
+  color: #f5f5f5;
+}
+
+.cardWrapper {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.card {
+  background-color: white;
+  width: 310px;
+  padding: 59px 26px;
+  border-radius: 12px;
+}
+
+.cardImageWrapper {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: #62853d4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto 25px;
+}
+
+.cardHeading {
+  font-size: 32px;
+  font-family: Katibeh;
+  color: #1c4930;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.cardDescription {
+  line-height: 20px;
+}
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 956px) {
+  .cardWrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
