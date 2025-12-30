@@ -1,0 +1,115 @@
+.howItWorksSection {
+  background-color: #faecd5;
+  padding: 75px 46px 100px;
+  text-align: center;
+}
+
+.sectionHeading {
+  color: #1c4930;
+  font-size: 40px;
+  line-height: 1;
+  font-family: Katibeh;
+  font-weight: 400;
+}
+
+.sectionTagline {
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.cardWrapper {
+  margin: 32px 38px;
+  display: flex;
+  gap: 32px;
+}
+
+.card {
+  width: 310px;
+  padding: 17px 23px;
+  border: 2px solid #33240a;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.cardImageWrapper {
+  width: 100%;
+  height: 148px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.cardImageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardHeading {
+  font-family: Katibeh;
+  font-size: 26px;
+  line-height: 1;
+  color: #1c4930;
+  margin-bottom: 8px;
+}
+
+.cardDescription {
+  line-height: 20px;
+  margin-bottom: 24px;
+}
+
+.details {
+  margin-bottom: 21px;
+}
+
+.card button,
+.exploreChallengeBtn {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #faecd5;
+  background-color: #62853d;
+  border: none;
+  outline: 2px solid #62853d;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.card button:hover {
+  background-color: #1c4930;
+}
+
+.exploreChallengeBtn {
+  width: 264px;
+  margin: 0 auto;
+  background-color: white;
+  color: #1c4930;
+}
+
+.exploreChallengeBtn:hover {
+  background-color: #62853d;
+  color: #faecd5;
+}
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 1024px) {
+  .cardWrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 472px) {
+  .cardWrapper {
+    width: 100%;
+    margin: 24px auto;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
