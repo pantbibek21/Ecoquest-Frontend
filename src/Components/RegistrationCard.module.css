@@ -1,0 +1,71 @@
+.registrationSection {
+  padding: 83px 46px 126px;
+}
+
+.sectionCard {
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.cardHeading {
+  color: #1c4930;
+  font-size: 48px;
+  line-height: 42px;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.cardContent p {
+  line-height: 28px;
+}
+
+.cardImageWrapper {
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+.cardImageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.registerBtn {
+  display: block;
+  width: 143px;
+  padding: 9px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #faecd5;
+  background-color: #62853d;
+  border: none;
+  outline: 2px solid #62853d;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  margin-top: 28px;
+}
+
+.registerBtn:hover {
+  background-color: #1c4930;
+}
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 472px) {
+  .registrationSection {
+    padding: 83px 46px;
+  }
+
+  .sectionCard {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
