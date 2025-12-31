@@ -7,3 +7,8 @@
 body {
   font-family: "Asap", sans-serif;
 }
+
+.sectionContainer {
+  max-width: 1342px;
+  margin: 0 auto;
+}

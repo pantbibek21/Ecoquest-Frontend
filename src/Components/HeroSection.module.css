@@ -78,7 +78,7 @@ button {
 @media screen and (max-width: 856px) {
   .heroSection {
     background-color: #faecd5;
-    padding: 24px 46px;
+    padding: 24px 46px 88px;
   }
 
   .heroCard {

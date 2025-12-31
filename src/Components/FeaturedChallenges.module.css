@@ -18,8 +18,9 @@
 }
 
 .cardWrapper {
-  margin: 32px 38px;
+  margin: 32px 0px;
   display: flex;
+  justify-content: space-between;
   gap: 32px;
 }
 
