@@ -2,6 +2,7 @@ import style from "../Components/FeaturedChallenges.module.css";
 import challengesJSON from "../data/challenges.json";
 import categoryJSON from "../data/category.json";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const FeaturedChallenges = () => {
   const category = categoryJSON;
@@ -35,9 +36,17 @@ const FeaturedChallenges = () => {
             })}
           </div>
 
-          <button className={style.exploreChallengeBtn}>
-            Explore all Challenges
-          </button>
+          <Link
+            to="/challenges"
+            style={{ textDecoration: "none" }}
+            onClick={() =>
+              window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+            }
+          >
+            <button className={style.exploreChallengeBtn}>
+              Explore all Challenges
+            </button>
+          </Link>
         </div>
       </div>
     </div>
