@@ -5,7 +5,7 @@
     "title": "Home Water Efficiency Challenge",
     "tagline": "Simple actions to reduce water use at home and beyond.",
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
-    "days": 14,
+    "days": 10,
     "participants": 50,
     "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
     "toDo": [
@@ -24,10 +24,10 @@
   {
     "id": 2,
     "categoryId": 2,
-    "title": "Home Water Efficiency Challenge",
+    "title": "Energy Efficiency Challenge",
     "tagline": "Simple actions to reduce water use at home and beyond.",
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
-    "days": 14,
+    "days": 15,
     "participants": 50,
     "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
     "toDo": [
@@ -46,10 +46,10 @@
   {
     "id": 3,
     "categoryId": 3,
-    "title": "Home Water Efficiency Challenge",
+    "title": "Transport Efficiency Challenge",
     "tagline": "Simple actions to reduce water use at home and beyond.",
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
-    "days": 14,
+    "days": 15,
     "participants": 50,
     "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
     "toDo": [
@@ -68,10 +68,10 @@
   {
     "id": 4,
     "categoryId": 4,
-    "title": "Home Water Efficiency Challenge",
+    "title": "Lifestyle Challenge",
     "tagline": "Simple actions to reduce water use at home and beyond.",
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
-    "days": 14,
+    "days": 7,
     "participants": 50,
     "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
     "toDo": [
