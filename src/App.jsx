@@ -1,28 +1,16 @@
-import { useState } from "react";
-import "./App.css";
-import Header from "./Components/Header";
-import HeroSection from "./Components/HeroSection";
-import HowItWorks from "./Components/HowItWorks";
-import FeaturedChallenges from "./Components/FeaturedChallenges";
-import RegistrationCard from "./Components/registrationCard";
-import Testimonial from "./Components/Testimonial";
-import About from "./Components/About";
-import Footer from "./Components/Footer";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+import Homepage from "./pages/homepage";
+import Challenges from "./pages/Challenges";
 
 function App() {
   return (
-    <>
-      <div className="container">
-        <Header />
-        <HeroSection />
-        <HowItWorks />
-        <FeaturedChallenges />
-        <RegistrationCard />
-        <Testimonial />
-        <About />
-        <Footer />
-      </div>
-    </>
+    <BrowserRouter basename="/Ecoquest-Frontend">
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/challenges" element={<Challenges />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
