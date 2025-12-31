@@ -7,6 +7,7 @@ import FeaturedChallenges from "./Components/FeaturedChallenges";
 import RegistrationCard from "./Components/registrationCard";
 import Testimonial from "./Components/Testimonial";
 import About from "./Components/About";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <RegistrationCard />
         <Testimonial />
         <About />
+        <Footer />
       </div>
     </>
   );

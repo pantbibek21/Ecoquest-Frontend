@@ -1,0 +1,47 @@
+.footerSection {
+  padding: 64px 46px;
+}
+
+footer {
+  max-width: 472px;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 12px;
+}
+
+nav .heading {
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+}
+
+nav a:hover {
+  color: #62853d;
+}
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 472px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  nav ul {
+    width: 45%;
+  }
+}
