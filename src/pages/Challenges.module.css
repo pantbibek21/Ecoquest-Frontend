@@ -1,0 +1,163 @@
+.container {
+  background-color: #faecd5;
+  padding: 250px 46px 316px;
+}
+
+.challengeIntroSection {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.challengeIntroSection h2 {
+  color: #1c4930;
+  font-size: 40px;
+  line-height: 1;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.challengeIntroSection p {
+  line-height: 28px;
+}
+
+.filterSection p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1c4930;
+  margin-bottom: 12px;
+}
+
+select {
+  padding: 8px;
+  width: 165px;
+  border-radius: 8px;
+  border: 1px solid #1c4930;
+  margin-right: 18px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #1c4930;
+}
+
+option {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1c4930;
+}
+
+.selectWrapper:first-of-type select {
+  width: 264px;
+}
+
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.customSelect {
+  appearance: none;
+  padding-right: 8px;
+  margin-bottom: 12px;
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  font-size: 32px;
+  color: #1c4930;
+}
+
+.selectWrapper:focus-within .dropdownIcon {
+  transform: rotateX(180deg);
+  top: -5px;
+}
+
+.cardWrapper {
+  margin: 32px 0px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.card {
+  width: 310px;
+  padding: 17px 23px;
+  border: 2px solid #33240a;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.cardImageWrapper {
+  width: 100%;
+  height: 148px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.cardImageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardHeading {
+  font-family: Katibeh;
+  font-size: 26px;
+  line-height: 1;
+  color: #1c4930;
+  margin-bottom: 8px;
+}
+
+.cardDescription {
+  line-height: 20px;
+  margin-bottom: 24px;
+}
+
+.details {
+  margin-bottom: 21px;
+}
+
+.card button {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #faecd5;
+  background-color: #62853d;
+  border: none;
+  outline: 2px solid #62853d;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.card button:hover {
+  background-color: #1c4930;
+}
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 1024px) {
+  .cardWrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 472px) {
+  .container {
+    padding: 72px 46px 316px;
+  }
+
+  .cardWrapper {
+    width: 100%;
+    margin: 24px auto;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
