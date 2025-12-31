@@ -1,0 +1,46 @@
+.aboutSection {
+  background-color: #62853d;
+  padding: 48px 46px 105px;
+  text-align: center;
+}
+
+.sectionCard {
+  max-width: 961px;
+  margin: 0 auto;
+  color: white;
+  line-height: 28px;
+}
+
+.cardHeading {
+  font-size: 48px;
+  line-height: 42px;
+  color: #faecd5;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.meetTheTeamBtn {
+  display: block;
+  margin: 28px auto;
+  background-color: transparent;
+  border: none;
+}
+
+.meetTheTeamBtn:hover .icon {
+  transform: translateX(4px);
+}
+
+.meetTheTeamBtn a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Asap, sans-serif;
+}
+
+.meetTheTeamBtn .icon {
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 0.4s ease;
+}

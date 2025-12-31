@@ -6,6 +6,7 @@ import HowItWorks from "./Components/HowItWorks";
 import FeaturedChallenges from "./Components/FeaturedChallenges";
 import RegistrationCard from "./Components/registrationCard";
 import Testimonial from "./Components/Testimonial";
+import About from "./Components/About";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <FeaturedChallenges />
         <RegistrationCard />
         <Testimonial />
+        <About />
       </div>
     </>
   );
