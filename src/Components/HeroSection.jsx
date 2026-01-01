@@ -1,6 +1,7 @@
 import style from "../Components/HeroSection.module.css";
 import logo from "../Assets/logo.png";
 import hero from "../Assets/hero.png";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -26,12 +27,14 @@ const HeroSection = () => {
 
             {/* Call to Action buttons */}
             <div className={style.buttons}>
-              <button
-                className={`${style.button} ${style["explore-challenges-btn"]}`}
-              >
-                {" "}
-                Explore Challenges
-              </button>
+              <Link to="/challenges">
+                <button
+                  className={`${style.button} ${style["explore-challenges-btn"]}`}
+                >
+                  {" "}
+                  Explore Challenges
+                </button>
+              </Link>
               <button className={`${style.button} ${style["sign-up-btn"]}`}>
                 Sign Up for free
               </button>
