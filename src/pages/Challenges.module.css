@@ -85,6 +85,7 @@ option {
   padding: 17px 23px;
   border: 1px solid #33240a;
   border-radius: 12px;
+  box-shadow: 0px 0px 4px 1px #33240a70;
   background-color: white;
 }
 
