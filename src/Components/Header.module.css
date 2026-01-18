@@ -1,18 +1,21 @@
 header {
   padding: 24px 46px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin: 0 auto;
-}
-
-.wrapper {
-  position: sticky;
 }
 
 .menu {
   font-size: 32px;
   cursor: pointer;
+}
+
+.buttons {
+  right: 0px;
+  padding: 0 46px;
+  position: absolute;
+
 }
 
 .button {
@@ -40,4 +43,10 @@ header {
 
 .login:hover {
   background-color: #567535;
+}
+
+header img {
+  max-height: 40px;
+  width: auto;
+  padding-left: 24px;
 }

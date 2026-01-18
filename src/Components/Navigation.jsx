@@ -1,5 +1,6 @@
 import Burger from "./Burger.jsx";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
 
@@ -14,8 +15,8 @@ export default function Navigation() {
         <div className="navigation">
             <h3>EcoQuest</h3>
             <ul>
-                <li><a href="Index">Home</a></li>
-                <li><a href="Challenges">Challenges</a></li>
+                <li><Link to="//">Home</Link></li>
+                <li><Link to="/challenges">Challenges</Link></li>
                 <li><a href="How it works">How it works</a></li>
             </ul>
             <h3>Company</h3>
