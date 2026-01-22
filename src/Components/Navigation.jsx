@@ -15,10 +15,11 @@ export default function Navigation() {
         <div className="navigation">
             <h3>EcoQuest</h3>
             <ul>
-                <li><Link to="//">Home</Link></li>
+                <li><Link to="/home">Home</Link></li>
                 <li><Link to="/challenges">Challenges</Link></li>
                 <li><a href="How it works">How it works</a></li>
             </ul>
+            
             <h3>Company</h3>
             <ul>
                 <li><a href="About">About</a></li>
@@ -27,9 +28,9 @@ export default function Navigation() {
             </ul>
             <h3>Legal</h3>
             <ul>
-                <li><a href="Privacy Policy">Privacy Policy</a></li>
-                <li><a href="Terms of Service">Terms of Service</a></li>
-                <li><a href="Accessibility">Accessibility</a></li>
+                <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service">Terms of Service</Link></li>
+                <li><Link to="/accessibility">Accessibility</Link></li>
             </ul>
         </div>
 
@@ -48,7 +49,8 @@ export default function Navigation() {
                 margin-top: 50px;
                 padding: 0 46px;
                 position: absolute;
-                left: 0px;            
+                left: 0px;
+                z-index: 10;            
                 }
 
             .navigation h3 {

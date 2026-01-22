@@ -15,6 +15,7 @@ export default function Burger({isOpen}) {
                     justify-content: space-around;
                     flex-flow: column nowrap;
                     z-index: 10;
+                    cursor: pointer;
                 }
 
                 .line{

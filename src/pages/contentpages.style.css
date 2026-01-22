@@ -1,0 +1,36 @@
+.spacer {
+  background-color: #faecd5;
+  padding: 86px 46px 122px;
+  
+}
+
+.content-container {
+  max-width: 1342px;
+    margin: 0 auto;
+}
+
+h1 {
+  color: #1c4930;
+  font-size: 48px;
+  line-height: 1;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+h2 {
+  color: #1c4930;
+  font-size: 28px;
+  line-height: 1.2;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-top: 32px;
+}
+
+p {
+  line-height: 28px;
+}
+ul {
+  margin-left: 20px;
+  margin-bottom: 24px;
+}

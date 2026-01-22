@@ -6,6 +6,11 @@ header {
   margin: 0 auto;
 }
 
+.wrapper {
+  position: sticky;
+  top: 0;
+}
+
 .menu {
   font-size: 32px;
   cursor: pointer;

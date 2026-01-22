@@ -13,7 +13,7 @@ const Header = () => {
           </div>
         </nav>
         <div>
-              <Link to="//"><img className="headerlogo" src="src/assets/logo.png" alt="Logo of EcoQuest" /></Link>
+              <Link to="/home"><img className="headerlogo" src="src/assets/logo.png" alt="Logo of EcoQuest" /></Link>
         </div>
         <div className={style.buttons}>
           <button className={`${style.button} ${style["sign-up"]}`}>
