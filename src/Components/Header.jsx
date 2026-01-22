@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import style from "../Components/Header.module.css";
 import Navigation from "./Navigation.jsx";
+import Logo from "../Assets/logo.png";
 
 const Header = () => {
-  
   return (
     <div className="wrapper">
       <header>
@@ -13,7 +13,9 @@ const Header = () => {
           </div>
         </nav>
         <div>
-              <Link to="/home"><img className="headerlogo" src="src/assets/logo.png" alt="Logo of EcoQuest" /></Link>
+          <Link to="/home">
+            <img className="headerlogo" src={Logo} alt="Logo of EcoQuest" />
+          </Link>
         </div>
         <div className={style.buttons}>
           <button className={`${style.button} ${style["sign-up"]}`}>
@@ -25,6 +27,6 @@ const Header = () => {
       </header>
     </div>
   );
-}
+};
 
 export default Header;
