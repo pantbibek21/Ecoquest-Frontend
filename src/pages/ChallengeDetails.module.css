@@ -1,0 +1,135 @@
+.spacer {
+  background-color: #faecd5;
+  padding: 86px 46px 122px;
+  
+}
+
+.content-container {
+  max-width: 1342px;
+    margin: 0 auto;
+}
+
+.challenge-main-info {
+  padding: 17px 23px;
+  border: 1px solid #33240a;
+  border-radius: 12px;
+  box-shadow: 0px 0px 4px 1px #33240a70;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 120px;
+}
+
+.challenge-main-info-image img {
+  min-width: 350px;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  overflow: clip;
+  margin-bottom: 18px;
+}
+
+.challenge-main-info button {
+  display: block;
+  width: 300px;
+  padding: 9px;
+  margin: 9px 0px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #faecd5;
+  background-color: #62853d;
+  border: none;
+  outline: 2px solid #62853d;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.challenge-main-info button:hover {
+  background-color: #1c4930;
+}
+
+.challenge-todos {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+}
+
+.challenge-todos div {
+  width: 49%;
+    padding: 17px 23px;
+  border: 1px solid #33240a;
+  border-radius: 12px;
+  box-shadow: 0px 0px 4px 1px #33240a70;
+  background-color: white;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  margin-bottom: 8px;
+}
+
+.todo-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.todo-text.checked {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #1c4930;
+  background-color: white;
+  accent-color: #1c4930;
+  cursor: pointer;
+  position: relative;
+}
+
+.duration {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+}
+
+h1 {
+  color: #1c4930;
+  font-size: 48px;
+  line-height: 1;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+h2 {
+  color: #1c4930;
+  font-size: 28px;
+  line-height: 1.2;
+  font-family: Katibeh;
+  font-weight: 400;
+  margin-top: 32px;
+}
+
+.subheading {
+    font-family: Katibeh;
+    font-size: 24px;
+  margin-bottom: 16px;
+}
+
+p {
+  line-height: 28px;
+}
+
+
+
