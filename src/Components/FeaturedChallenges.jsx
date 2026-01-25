@@ -1,12 +1,14 @@
 import style from "../Components/FeaturedChallenges.module.css";
 import challengesJSON from "../data/challenges.json";
 import categoryJSON from "../data/category.json";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const FeaturedChallenges = () => {
   const category = categoryJSON;
   const challenge = challengesJSON;
+  const navigate = useNavigate();
 
   return (
     <div className={style.howItWorksSection}>
@@ -30,6 +32,7 @@ const FeaturedChallenges = () => {
                   <p className={style.details}>
                     {item.days} days | {item.participants} participants
                   </p>
+                  <button className={style.secondaryBtn} onClick={() => navigate(`/challengedetails/${item.id}`)}>See Details</button>
                   <button>Join Challenge</button>
                 </div>
               );

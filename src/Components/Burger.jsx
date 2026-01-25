@@ -32,7 +32,6 @@ export default function Burger({isOpen}) {
                 }
 
                 .line2{
-                    transform: ${isOpen ? 'opacity(0)' : 'opacity(1)'};
                     opacity: ${isOpen ? 0 : 1};
                 }
 

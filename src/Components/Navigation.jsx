@@ -1,23 +1,50 @@
 import Burger from "./Burger.jsx";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navigation() {
 
       const [burgerOpen, setBurgerOpen] = useState(false);
+      const menuRef =useRef(null);
     
       const toggleBurger = () => {
         setBurgerOpen(!burgerOpen);
       }
 
+      // Closes menu when user scrolls
+    useEffect(() => {
+        const handleScroll = () => {
+        if (burgerOpen) setBurgerOpen(false);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [burgerOpen]);
+
+    // Closes menu when user clicks or taps outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+        if (burgerOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+            setBurgerOpen(false);
+        }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside);
+        return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchstart", handleClickOutside);
+        };
+    }, [burgerOpen]);
+
   return (
     <div>
-        <div className="navigation">
+        <div ref={menuRef}>
+            <div className={`navigation ${burgerOpen ? "open" : ""}`}>
+            
             <h3>EcoQuest</h3>
             <ul>
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/challenges">Challenges</Link></li>
-                <li><a href="How it works">How it works</a></li>
+                <li><Link to="/home#how-it-works">How it works</Link></li>
             </ul>
             
             <h3>Company</h3>
@@ -37,21 +64,26 @@ export default function Navigation() {
         <div className="burger" onClick={toggleBurger}>
             <Burger isOpen={burgerOpen} />
         </div>
+        </div>
 
         <style jsx>{`
 
             .navigation {
-                display: ${burgerOpen ? 'inline' : 'none'};
+                position: fixed;
+                top: 0px;
+                left: 0px;
                 background-color: #ffffff;
                 height: 100%;
                 width: 300px;
-                float: right;
-                margin-top: 50px;
-                padding: 0 46px;
-                position: absolute;
-                left: 0px;
+                padding: 60px 46px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
                 z-index: 10;            
-                }
+            }
+
+            .navigation.open {
+                transform: translateX(0); /* slide in */
+            }
 
             .navigation h3 {
                 margin-top: 40px;

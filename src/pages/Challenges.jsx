@@ -3,6 +3,7 @@ import style from "../pages/Challenges.module.css";
 import "../index.css";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 
 import challengeJSON from "../data/challenges.json";
@@ -11,6 +12,8 @@ import categoryJSON from "../data/category.json";
 const Challenges = () => {
   const [categoryId, setCategoryId] = useState("");
   const [days, setDays] = useState("");
+
+  const navigate = useNavigate();
 
   const filteredChallenges = challengeJSON.filter((item) => {
     const matchesCategory = !categoryId || item.categoryId === categoryId;
@@ -117,6 +120,7 @@ const Challenges = () => {
                 <p className={style.details}>
                   {item.days} days | {item.participants} participants
                 </p>
+                <button className={style.secondaryBtn} onClick={() => navigate(`/challengedetails/${item.id}`)}>See Details</button>
                 <button>Join Challenge</button>
               </div>
             );

@@ -7,7 +7,7 @@ import stayConsistentImg from "../Assets/stay-consistent.png";
 
 const HowItWorks = () => {
   return (
-    <div className={style.howItWorksSection}>
+    <div id="how-it-works"className={style.howItWorksSection}>
       {/* Layout container for consistent page spacing */}
       <div className="sectionContainer">
         <div className={style.sectionCard}>

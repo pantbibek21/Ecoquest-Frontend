@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "../Components/Header.module.css";
 import Navigation from "./Navigation.jsx";
+import logo from "../assets/logo.png";
 
 const Header = () => {
   
@@ -13,7 +14,7 @@ const Header = () => {
           </div>
         </nav>
         <div>
-              <Link to="/home"><img className="headerlogo" src="src/assets/logo.png" alt="Logo of EcoQuest" /></Link>
+              <Link to="/home"><img className="headerlogo" src={logo} alt="Logo of EcoQuest" /></Link>
         </div>
         <div className={style.buttons}>
           <button className={`${style.button} ${style["sign-up"]}`}>

@@ -7,18 +7,17 @@
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
     "days": 10,
     "participants": 50,
-    "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
-    "toDo": [
+    "cardImage": "https://i.ibb.co/Y4msXyxB/challenge-image-water1.jpg",
+    "dailyToDo": [
       { "id": 1, "text": "Limit your shower to 5 minutes." },
       { "id": 2, "text": "Turn off the tap while brushing or shaving." },
       { "id": 3, "text": "Reuse greywater from rinsing vegetables." },
-      {
-        "id": 4,
-        "text": "Wash dishes using a bowl instead of running tap water."
-      },
-      { "id": 5, "text": "Only run full laundry loads." },
-      { "id": 6, "text": "Check faucets for small leaks or drips." },
-      { "id": 7, "text": "Record one water-saving action you completed." }
+      { "id": 4, "text": "Wash dishes using a bowl instead of running tap water."},
+      { "id": 5, "text": "Only run full laundry loads."}
+    ],
+    "uniqueToDo": [
+      { "id": 1, "text": "Check faucets for small leaks or drips." },
+      { "id": 2, "text": "Record one water-saving action you completed." }
     ]
   },
   {
@@ -29,18 +28,17 @@
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
     "days": 15,
     "participants": 50,
-    "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
-    "toDo": [
-      { "id": 1, "text": "Limit your shower to 5 minutes." },
-      { "id": 2, "text": "Turn off the tap while brushing or shaving." },
-      { "id": 3, "text": "Reuse greywater from rinsing vegetables." },
-      {
-        "id": 4,
-        "text": "Wash dishes using a bowl instead of running tap water."
-      },
-      { "id": 5, "text": "Only run full laundry loads." },
-      { "id": 6, "text": "Check faucets for small leaks or drips." },
-      { "id": 7, "text": "Record one water-saving action you completed." }
+    "cardImage": "https://i.ibb.co/WvBbKz7f/challenge-image-energy1.jpg",
+    "dailyToDo": [
+      { "id": 1, "text": "Turn off lights when leaving a room." },
+      { "id": 2, "text": "Unplug electronics not in use." },
+      { "id": 3, "text": "Use natural light instead of lamps when possible." },
+      { "id": 4, "text": "Set your thermostat 1–2 degrees lower or higher depending on season." }
+    ],
+    "uniqueToDo": [
+      { "id": 1, "text": "Conduct an energy audit of your home appliances." },
+      { "id": 2, "text": "Switch one light bulb to an energy-efficient LED." },
+      { "id": 3, "text": "Identify and replace a high-energy consuming appliance if possible." }
     ]
   },
   {
@@ -51,18 +49,16 @@
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
     "days": 15,
     "participants": 50,
-    "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
-    "toDo": [
-      { "id": 1, "text": "Limit your shower to 5 minutes." },
-      { "id": 2, "text": "Turn off the tap while brushing or shaving." },
-      { "id": 3, "text": "Reuse greywater from rinsing vegetables." },
-      {
-        "id": 4,
-        "text": "Wash dishes using a bowl instead of running tap water."
-      },
-      { "id": 5, "text": "Only run full laundry loads." },
-      { "id": 6, "text": "Check faucets for small leaks or drips." },
-      { "id": 7, "text": "Record one water-saving action you completed." }
+    "cardImage": "https://i.ibb.co/8gY2qq85/challenge-image-transport1.jpg",
+    "dailyToDo": [
+      { "id": 1, "text": "Walk or bike for short trips instead of using a car." },
+      { "id": 2, "text": "Use public transport when possible." },
+      { "id": 3, "text": "Carpool or share rides with family or colleagues." }
+    ],
+    "uniqueToDo": [
+      { "id": 1, "text": "Plan your week to reduce unnecessary trips." },
+      { "id": 2, "text": "Check tire pressure and maintain your vehicle for efficiency." },
+      { "id": 3, "text": "Try one completely car-free day this week." }
     ]
   },
   {
@@ -73,18 +69,16 @@
     "description": "This challenge focuses on building simple habits that help reduce daily household water use. Many homes unknowingly waste water through leaks, long showers, or unnecessary tap use. Over the next seven days, you’ll practice mindful water- saving actions that are easy to adopt and highly effective in protecting freshwater resources.The goal is to help you become more conscious of your usage and identify areas for improvement.",
     "days": 7,
     "participants": 50,
-    "cardImage": "https://media.istockphoto.com/id/1273739173/photo/beautiful-striped-a-kitten-plays-in-a-sunny-summer-garden-and-catches-a-bright-butterfly.jpg?s=612x612&w=0&k=20&c=sBizcvEIPo5WPO_RMdTpa_76zxbb249hapXq2NOhhtE=",
-    "toDo": [
-      { "id": 1, "text": "Limit your shower to 5 minutes." },
-      { "id": 2, "text": "Turn off the tap while brushing or shaving." },
-      { "id": 3, "text": "Reuse greywater from rinsing vegetables." },
-      {
-        "id": 4,
-        "text": "Wash dishes using a bowl instead of running tap water."
-      },
-      { "id": 5, "text": "Only run full laundry loads." },
-      { "id": 6, "text": "Check faucets for small leaks or drips." },
-      { "id": 7, "text": "Record one water-saving action you completed." }
+    "cardImage": "https://i.ibb.co/m55m5tTJ/challenge-image-lifestyle1.jpg",
+    "dailyToDo": [
+      { "id": 1, "text": "Bring a reusable water bottle or cup." },
+      { "id": 2, "text": "Avoid single-use plastics for meals." },
+      { "id": 3, "text": "Take stairs instead of elevator if possible." }
+    ],
+    "uniqueToDo": [
+      { "id": 1, "text": "Plan a meat-free meal once this week." },
+      { "id": 2, "text": "Organize a clothing swap or donate unused items." },
+      { "id": 3, "text": "Set a personal sustainability goal for the week." }
     ]
   }
 ]

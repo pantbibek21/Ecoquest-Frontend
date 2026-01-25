@@ -84,6 +84,27 @@
   background-color: #1c4930;
 }
 
+.card .secondaryBtn {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin: 9px 0px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #1c4930;
+  background-color: #ffffff;
+  border: none;
+  outline: 2px solid #1c4930;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.card .secondaryBtn:hover {
+  color: #faecd5;
+  background-color: #1c4930;
+}
+
 .exploreChallengeBtn {
   width: 264px;
   margin: 0 auto;
