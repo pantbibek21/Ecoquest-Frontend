@@ -6,7 +6,7 @@
 
 .content-container {
   max-width: 1342px;
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .challenge-main-info {
@@ -16,14 +16,23 @@
   box-shadow: 0px 0px 4px 1px #33240a70;
   background-color: white;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  gap: 120px;
+  gap: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .challenge-main-info {
+    flex-wrap: wrap-reverse;
+  }
+}
+
+.challenge-main-info-text {
+  width: 100%;
 }
 
 .challenge-main-info-image img {
-  min-width: 350px;
-  max-width: 400px;
-  height: auto;
+  width: 100%;
   border-radius: 8px;
   overflow: clip;
   margin-bottom: 18px;
@@ -51,23 +60,31 @@
 
 .challenge-todos {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  gap: 24px;
   padding-top: 24px;
 }
 
 .challenge-todos div {
-  width: 49%;
-    padding: 17px 23px;
+  width: 100%;
+  padding: 17px 23px;
   border: 1px solid #33240a;
   border-radius: 12px;
   box-shadow: 0px 0px 4px 1px #33240a70;
   background-color: white;
 }
 
+@media screen and (max-width: 1024px) {
+  .challenge-todos {
+    flex-wrap: wrap;
+  }
+}
+
 .todo-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 16px 0;
 }
 
 .todo-item {
@@ -89,7 +106,7 @@
 .todo-checkbox {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 100%;
   border: 2px solid #1c4930;
   background-color: white;
   accent-color: #1c4930;
@@ -109,7 +126,7 @@ h1 {
   line-height: 1;
   font-family: Katibeh;
   font-weight: 400;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 
 h2 {
@@ -118,12 +135,12 @@ h2 {
   line-height: 1.2;
   font-family: Katibeh;
   font-weight: 400;
-  margin-top: 32px;
+  margin-block-start: 0;
 }
 
 .subheading {
-    font-family: Katibeh;
-    font-size: 24px;
+  font-family: Katibeh;
+  font-size: 24px;
   margin-bottom: 16px;
 }
 

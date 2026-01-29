@@ -28,14 +28,24 @@ const ChallengeDetails = () => {
     return <p>Challenge nicht gefunden</p>;
   }
 
-  const [checkedItems, setCheckedItems] = useState(
+  const [checkedItemsDaily, setCheckedItemsDaily] = useState(
     challenge.dailyToDo.map(() => false)
   );
 
-  const handleCheckboxChange = (index) => {
-    const updated = [...checkedItems];
+  const handleCheckboxChangeDaily = (index) => {
+    const updated = [...checkedItemsDaily];
     updated[index] = !updated[index];
-    setCheckedItems(updated);
+    setCheckedItemsDaily(updated);
+  };
+
+  const [checkedItemsUnique, setCheckedItemsUnique] = useState(
+    challenge.uniqueToDo.map(() => false)
+  );
+
+  const handleCheckboxChangeUnique = (index) => {
+    const updated = [...checkedItemsUnique];
+    updated[index] = !updated[index];
+    setCheckedItemsUnique(updated);
   };
 
     return (
@@ -86,11 +96,11 @@ const ChallengeDetails = () => {
                   <label className={style["todo-label"]}>
                     <input
                       type="checkbox"
-                      checked={checkedItems[index]}
-                      onChange={() => handleCheckboxChange(index)}
+                      checked={checkedItemsDaily[index]}
+                      onChange={() => handleCheckboxChangeDaily(index)}
                       className={style["todo-checkbox"]}
                     />
-                    <span className={checkedItems[index] ? style["todo-text"] + " " + style["checked"] : style["todo-text"]}>
+                    <span className={checkedItemsDaily[index] ? style["todo-text"] + " " + style["checked"] : style["todo-text"]}>
                       {dailyToDo.text}
                     </span>
                   </label>
@@ -107,11 +117,23 @@ const ChallengeDetails = () => {
         <p>
           Finish these tasks for a point boost and a create a lasting impact.
         </p>
-        <ul>
-        {challenge.uniqueToDo.map((uniqueTodo) => (
-          <li key={uniqueTodo.id}>{uniqueTodo.text}</li>
-        ))}
-      </ul>
+        <ul className={style["todo-list"]}>
+          {challenge.uniqueToDo.map((uniqueToDo, index) => (
+            <li key={uniqueToDo.id} className={style["todo-item"]}>
+              <label className={style["todo-label"]}>
+                <input
+                  type="checkbox"
+                  checked={checkedItemsUnique[index]}
+                  onChange={() => handleCheckboxChangeUnique(index)}
+                  className={style["todo-checkbox"]}
+                />
+                <span className={checkedItemsUnique[index] ? style["todo-text"] + " " + style["checked"] : style["todo-text"]}>
+                  {uniqueToDo.text}
+                </span>
+              </label>
+            </li>
+          ))}
+        </ul>
       </div>
       </div>
 

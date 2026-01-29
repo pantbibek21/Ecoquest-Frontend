@@ -16,8 +16,8 @@
       { "id": 5, "text": "Only run full laundry loads."}
     ],
     "uniqueToDo": [
-      { "id": 1, "text": "Check faucets for small leaks or drips." },
-      { "id": 2, "text": "Record one water-saving action you completed." }
+      { "id": 6, "text": "Check faucets for small leaks or drips." },
+      { "id": 7, "text": "Record one water-saving action you completed." }
     ]
   },
   {
@@ -36,9 +36,9 @@
       { "id": 4, "text": "Set your thermostat 1–2 degrees lower or higher depending on season." }
     ],
     "uniqueToDo": [
-      { "id": 1, "text": "Conduct an energy audit of your home appliances." },
-      { "id": 2, "text": "Switch one light bulb to an energy-efficient LED." },
-      { "id": 3, "text": "Identify and replace a high-energy consuming appliance if possible." }
+      { "id": 5, "text": "Conduct an energy audit of your home appliances." },
+      { "id": 6, "text": "Switch one light bulb to an energy-efficient LED." },
+      { "id": 7, "text": "Identify and replace a high-energy consuming appliance if possible." }
     ]
   },
   {
@@ -56,9 +56,9 @@
       { "id": 3, "text": "Carpool or share rides with family or colleagues." }
     ],
     "uniqueToDo": [
-      { "id": 1, "text": "Plan your week to reduce unnecessary trips." },
-      { "id": 2, "text": "Check tire pressure and maintain your vehicle for efficiency." },
-      { "id": 3, "text": "Try one completely car-free day this week." }
+      { "id": 4, "text": "Plan your week to reduce unnecessary trips." },
+      { "id": 5, "text": "Check tire pressure and maintain your vehicle for efficiency." },
+      { "id": 6, "text": "Try one completely car-free day this week." }
     ]
   },
   {
@@ -76,9 +76,9 @@
       { "id": 3, "text": "Take stairs instead of elevator if possible." }
     ],
     "uniqueToDo": [
-      { "id": 1, "text": "Plan a meat-free meal once this week." },
-      { "id": 2, "text": "Organize a clothing swap or donate unused items." },
-      { "id": 3, "text": "Set a personal sustainability goal for the week." }
+      { "id": 4, "text": "Plan a meat-free meal once this week." },
+      { "id": 5, "text": "Organize a clothing swap or donate unused items." },
+      { "id": 6, "text": "Set a personal sustainability goal for the week." }
     ]
   }
 ]
