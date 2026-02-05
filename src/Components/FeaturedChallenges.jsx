@@ -1,14 +1,35 @@
 import style from "../Components/FeaturedChallenges.module.css";
-import challengesJSON from "../data/challenges.json";
-import categoryJSON from "../data/category.json";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const FeaturedChallenges = () => {
-  const category = categoryJSON;
-  const challenge = challengesJSON;
+  const [challengeJSON, setChallengeJSON] = useState([]);
+
   const navigate = useNavigate();
+
+  // set useEffect to fetch challenge and challenge category data
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const challengesUrl = "http://localhost:3000/challenges";
+
+      try {
+        const challengesRes = await fetch(challengesUrl);
+
+        if (!challengesRes.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const challengesJsonData = await challengesRes.json();
+
+        setChallengeJSON(challengesJsonData);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={style.howItWorksSection}>
@@ -21,7 +42,7 @@ const FeaturedChallenges = () => {
 
           {/* Wrapper holding all step cards */}
           <div className={style.cardWrapper}>
-            {challenge.map((item) => {
+            {challengeJSON.map((item) => {
               return (
                 <div className={style.card} key={item.categoryId}>
                   <div className={style.cardImageWrapper}>
@@ -32,7 +53,12 @@ const FeaturedChallenges = () => {
                   <p className={style.details}>
                     {item.days} days | {item.participants} participants
                   </p>
-                  <button className={style.secondaryBtn} onClick={() => navigate(`/challengedetails/${item.id}`)}>See Details</button>
+                  <button
+                    className={style.secondaryBtn}
+                    onClick={() => navigate(`/challengedetails/${item.id}`)}
+                  >
+                    See Details
+                  </button>
                   <button>Join Challenge</button>
                 </div>
               );
