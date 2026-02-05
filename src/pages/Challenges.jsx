@@ -6,12 +6,11 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 
-import challengeJSON from "../data/challenges.json";
-import categoryJSON from "../data/category.json";
-
 const Challenges = () => {
   const [categoryId, setCategoryId] = useState("");
   const [days, setDays] = useState("");
+  const [challengeJSON, setChallengeJSON] = useState([]);
+  const [categoryJSON, setCategoryJSON] = useState([]);
 
   const navigate = useNavigate();
 
@@ -24,6 +23,36 @@ const Challenges = () => {
   function filterCategory(userCategory) {
     return categoryJSON.some((cat) => cat.name === userCategory);
   }
+
+  // set useEffect to fetch challenge and challenge category data
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const challengeCategoryUrl = "http://localhost:3000/categories";
+      const challengesUrl = "http://localhost:3000/challenges";
+
+      try {
+        const [categoryRes, challengesRes] = await Promise.all([
+          fetch(challengeCategoryUrl),
+          fetch(challengesUrl),
+        ]);
+
+        if (!categoryRes.ok || !challengesRes.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const categoryJsonData = await categoryRes.json();
+        const challengesJsonData = await challengesRes.json();
+
+        setCategoryJSON(categoryJsonData);
+        setChallengeJSON(challengesJsonData);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -120,7 +149,12 @@ const Challenges = () => {
                 <p className={style.details}>
                   {item.days} days | {item.participants} participants
                 </p>
-                <button className={style.secondaryBtn} onClick={() => navigate(`/challengedetails/${item.id}`)}>See Details</button>
+                <button
+                  className={style.secondaryBtn}
+                  onClick={() => navigate(`/challengedetails/${item.id}`)}
+                >
+                  See Details
+                </button>
                 <button>Join Challenge</button>
               </div>
             );
