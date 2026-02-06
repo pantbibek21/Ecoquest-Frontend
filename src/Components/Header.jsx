@@ -14,7 +14,7 @@ const Header = () => {
           </div>
         </nav>
         <div>
-          <Link to="/home">
+          <Link to="/">
             <img className="headerlogo" src={Logo} alt="Logo of EcoQuest" />
           </Link>
         </div>
