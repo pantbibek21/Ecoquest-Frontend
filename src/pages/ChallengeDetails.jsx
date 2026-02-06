@@ -8,28 +8,19 @@ import Footer from "../Components/Footer";
 
 import { FaRegClock } from "react-icons/fa";
 
-import challengeJSON from "../data/challenges.json";
-import categoryJSON from "../data/category.json";
-
-
-
-const ChallengeDetails = () => {
-    const { challengeId } = useParams();
-    console.log("challengeId:", challengeId);
-    console.log("challengeJSON:", challengeJSON);
-
-    const challenge = challengeJSON.find(
-        (item) => item.id === Number(challengeId)
-    );
-
-      console.log("found challenge:", challenge);
+const ChallengeDetails = ({ challengeJSON }) => {
+  const { challengeId } = useParams();
+  console.log(challengeJSON);
+  const challenge = challengeJSON.find(
+    (item) => item.id === Number(challengeId),
+  );
 
   if (!challenge) {
     return <p>Challenge nicht gefunden</p>;
   }
 
   const [checkedItemsDaily, setCheckedItemsDaily] = useState(
-    challenge.dailyToDo.map(() => false)
+    challenge.toDo.map(() => false),
   );
 
   const handleCheckboxChangeDaily = (index) => {
@@ -39,7 +30,7 @@ const ChallengeDetails = () => {
   };
 
   const [checkedItemsUnique, setCheckedItemsUnique] = useState(
-    challenge.uniqueToDo.map(() => false)
+    challenge.toDo.map(() => false),
   );
 
   const handleCheckboxChangeUnique = (index) => {
@@ -48,99 +39,98 @@ const ChallengeDetails = () => {
     setCheckedItemsUnique(updated);
   };
 
-    return (
+  return (
     <>
-    <div>
-      <Header />
-       <div className="spacer">
-        <div className="content-container">
-          <div className={style["challenge-main-info"]}>
+      <div>
+        <Header />
+        <div className="spacer">
+          <div className="content-container">
+            <div className={style["challenge-main-info"]}>
+              <div className={style["challenge-main-info-text"]}>
+                <h1>{challenge.title}</h1>
 
-            <div className={style["challenge-main-info-text"]}>
+                <p className={style["subheading"]}>{challenge.tagline}</p>
 
-        <h1>
-          {challenge.title}
-        </h1>
+                <p>{challenge.description}</p>
 
-        <p className={style["subheading"]}>
-          {challenge.tagline}
-        </p>
+                <div className={style.duration}>
+                  <FaRegClock /> &nbsp; Duration: {challenge.days} days
+                </div>
 
-        <p>
-          {challenge.description}
-        </p>
+                <button>Join Challenge</button>
+              </div>
+              <div className={style["challenge-main-info-image"]}>
+                <img src={challenge.cardImage} alt={challenge.title} />
+              </div>
+            </div>
 
-        <div className={style.duration}>
-          <FaRegClock /> &nbsp; Duration: {challenge.days} days
-        </div>
+            <div className={style["challenge-todos"]}>
+              <div className="daily-todos-section">
+                <h2>Daily To Dos</h2>
+                <p>
+                  Check off at least one task a day to keep up your daily
+                  streak.
+                </p>
+                <ul className={style["todo-list"]}>
+                  {challenge.toDo.map((toDo, index) => (
+                    <li key={toDo.id} className={style["todo-item"]}>
+                      <label className={style["todo-label"]}>
+                        <input
+                          type="checkbox"
+                          checked={checkedItemsDaily[index]}
+                          onChange={() => handleCheckboxChangeDaily(index)}
+                          className={style["todo-checkbox"]}
+                        />
+                        <span
+                          className={
+                            checkedItemsDaily[index]
+                              ? style["todo-text"] + " " + style["checked"]
+                              : style["todo-text"]
+                          }
+                        >
+                          {toDo.text}
+                        </span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-        <button>Join Challenge</button>
-
-        </div>
-        <div className={style["challenge-main-info-image"]}>
-          <img src={challenge.cardImage} alt={challenge.title} />
+              <div className="unique-todos-section">
+                <h2>Unique To Dos</h2>
+                <p>
+                  Finish these tasks for a point boost and a create a lasting
+                  impact.
+                </p>
+                <ul className={style["todo-list"]}>
+                  {challenge.toDo.map((toDo, index) => (
+                    <li key={toDo.id} className={style["todo-item"]}>
+                      <label className={style["todo-label"]}>
+                        <input
+                          type="checkbox"
+                          checked={checkedItemsUnique[index]}
+                          onChange={() => handleCheckboxChangeUnique(index)}
+                          className={style["todo-checkbox"]}
+                        />
+                        <span
+                          className={
+                            checkedItemsUnique[index]
+                              ? style["todo-text"] + " " + style["checked"]
+                              : style["todo-text"]
+                          }
+                        >
+                          {toDo.text}
+                        </span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className={style["challenge-todos"]}>  
-        <div className="daily-todos-section">
-        <h2>
-          Daily To Dos
-        </h2>
-        <p>
-          Check off at least one task a day to keep up your daily streak.
-        </p>
-        <ul className={style["todo-list"]}>
-              {challenge.dailyToDo.map((dailyToDo, index) => (
-                <li key={dailyToDo.id} className={style["todo-item"]}>
-                  <label className={style["todo-label"]}>
-                    <input
-                      type="checkbox"
-                      checked={checkedItemsDaily[index]}
-                      onChange={() => handleCheckboxChangeDaily(index)}
-                      className={style["todo-checkbox"]}
-                    />
-                    <span className={checkedItemsDaily[index] ? style["todo-text"] + " " + style["checked"] : style["todo-text"]}>
-                      {dailyToDo.text}
-                    </span>
-                  </label>
-                </li>
-              ))}
-            </ul>
+        <Footer />
       </div>
-    
-
-      <div className="unique-todos-section">
-        <h2>
-          Unique To Dos
-        </h2>
-        <p>
-          Finish these tasks for a point boost and a create a lasting impact.
-        </p>
-        <ul className={style["todo-list"]}>
-          {challenge.uniqueToDo.map((uniqueToDo, index) => (
-            <li key={uniqueToDo.id} className={style["todo-item"]}>
-              <label className={style["todo-label"]}>
-                <input
-                  type="checkbox"
-                  checked={checkedItemsUnique[index]}
-                  onChange={() => handleCheckboxChangeUnique(index)}
-                  className={style["todo-checkbox"]}
-                />
-                <span className={checkedItemsUnique[index] ? style["todo-text"] + " " + style["checked"] : style["todo-text"]}>
-                  {uniqueToDo.text}
-                </span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
-      </div>
-
-        </div>
-      </div>
-      <Footer />
-    </div>
     </>
   );
 };
