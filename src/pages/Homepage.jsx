@@ -7,13 +7,13 @@ import HowItWorks from "../Components/HowItWorks";
 import RegistrationCard from "../Components/registrationCard";
 import Testimonial from "../Components/Testimonial";
 
-const Homepage = () => {
+const Homepage = ({ challengeJSON }) => {
   return (
     <div className="container">
       <Header />
       <HeroSection />
       <HowItWorks />
-      <FeaturedChallenges />
+      <FeaturedChallenges challengeJSON={challengeJSON} />
       <RegistrationCard />
       <Testimonial />
       <About />

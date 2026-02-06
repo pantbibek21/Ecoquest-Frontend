@@ -2,34 +2,8 @@ import style from "../Components/FeaturedChallenges.module.css";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const FeaturedChallenges = () => {
-  const [challengeJSON, setChallengeJSON] = useState([]);
-
+const FeaturedChallenges = ({ challengeJSON }) => {
   const navigate = useNavigate();
-
-  // set useEffect to fetch challenge and challenge category data
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const challengesUrl = "http://localhost:3000/challenges";
-
-      try {
-        const challengesRes = await fetch(challengesUrl);
-
-        if (!challengesRes.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const challengesJsonData = await challengesRes.json();
-
-        setChallengeJSON(challengesJsonData);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <div className={style.howItWorksSection}>
