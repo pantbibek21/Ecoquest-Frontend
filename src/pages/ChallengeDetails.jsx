@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "../Components/Header";
 import style from "../pages/ChallengeDetails.module.css";
 import "../index.css";
-import Footer from "../Components/Footer";
+import Footer from "../components/Footer";
 
 import { FaRegClock } from "react-icons/fa";
 
