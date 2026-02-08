@@ -49,9 +49,9 @@ export default function Navigation() {
             
             <h3>Company</h3>
             <ul>
-                <li><a href="About">About</a></li>
-                <li><a href="Team">Team</a></li>
-                <li><a href="Contact">Contact</a></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/team">Team</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
             </ul>
             <h3>Legal</h3>
             <ul>
