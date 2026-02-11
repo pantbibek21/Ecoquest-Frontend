@@ -29,8 +29,8 @@ const Contact = () => {
   return (
     <div>
       <Header />
-      <div className="spacer">
-        <div className="content-container">
+      <div className={style.spacer}>
+        <div className={style["content-container"]}>
           <h1>Contact Us</h1>
           <p>
             Do you have any questions, feedback or problems with EcoQuest?{" "}

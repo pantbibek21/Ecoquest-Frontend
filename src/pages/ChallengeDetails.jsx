@@ -43,8 +43,8 @@ const ChallengeDetails = ({ challengeJSON }) => {
     <>
       <div>
         <Header />
-        <div className="spacer">
-          <div className="content-container">
+        <div className={style.spacer}>
+          <div className={style["content-container"]}>
             <div className={style["challenge-main-info"]}>
               <div className={style["challenge-main-info-text"]}>
                 <h1>{challenge.title}</h1>

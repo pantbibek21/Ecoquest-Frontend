@@ -1,7 +1,6 @@
 .spacer {
   background-color: #faecd5;
   padding: 86px 46px 122px;
-  
 }
 
 .content-container {
@@ -18,18 +17,19 @@
   padding-top: 25px;
 }
 
-.input input, .input textarea {
+.input input,
+.input textarea {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.input label{
+.input label {
   display: flex;
   align-items: center;
   text-align: left;
-  margin-right: 10px; 
+  margin-right: 10px;
   min-width: 50px;
 }
 
@@ -124,7 +124,6 @@
   .profileCard {
     width: 40%;
   }
-
 }
 
 @media screen and (max-width: 756px) {
@@ -158,10 +157,7 @@
   .profileCard {
     width: 100%;
   }
-
 }
-
-
 
 h1 {
   color: #1c4930;
