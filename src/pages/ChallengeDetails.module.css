@@ -1,7 +1,6 @@
 .spacer {
   background-color: #faecd5;
   padding: 86px 46px 122px;
-  
 }
 
 .content-container {
@@ -19,6 +18,14 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 24px;
+}
+
+.message {
+  display: inline-block;
+  margin-top: 12px;
+}
+.errorMessage {
+  color: red;
 }
 
 @media screen and (max-width: 768px) {
@@ -115,9 +122,9 @@
 }
 
 .duration {
-    display: flex;
-    height: 4rem;
-    align-items: center;
+  display: flex;
+  height: 4rem;
+  align-items: center;
 }
 
 h1 {
@@ -147,6 +154,3 @@ h2 {
 p {
   line-height: 28px;
 }
-
-
-

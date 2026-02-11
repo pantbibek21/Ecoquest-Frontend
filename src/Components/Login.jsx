@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 const Login = ({ handleRegisterClick }) => {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("bibek@gmail.com");
   const [password, setPassword] = useState();
   const [loginMessage, setLoginMessage] = useState("");
 
@@ -28,7 +28,7 @@ const Login = ({ handleRegisterClick }) => {
     // email: bibek@gmail.com
     // password: test@123
 
-    if (email === "bibek@gmail.com" && password === "test@123") {
+    if (email === "bibek@gmail.com" && password === "bibek") {
       console.log("Logged in successfully");
       setLoginMessage("Logged in successfully!");
       login({ userName: "Bibek" });

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-
+import { useAuth } from "../Context/AuthContext";
 import Header from "../Components/Header";
 import style from "../pages/ChallengeDetails.module.css";
 import "../index.css";
@@ -10,7 +10,11 @@ import { FaRegClock } from "react-icons/fa";
 
 const ChallengeDetails = ({ challengeJSON }) => {
   const { challengeId } = useParams();
-  console.log(challengeJSON);
+  const { isAuthenticated } = useAuth();
+  const [message, setMessage] = useState("");
+  const [btnContent, setBtnContent] = useState("Join Challenge");
+  const [isDisabled, setIsDisabled] = useState(true);
+
   const challenge = challengeJSON.find(
     (item) => item.id === Number(challengeId),
   );
@@ -39,6 +43,22 @@ const ChallengeDetails = ({ challengeJSON }) => {
     setCheckedItemsUnique(updated);
   };
 
+  const handleJoinChallenge = () => {
+    if (isAuthenticated) {
+      setMessage("Challenge registered!🥳");
+      resetMessage();
+      setBtnContent("Registered!");
+      setIsDisabled(false);
+    } else {
+      setMessage("You need to be logged in first 🙂!");
+      resetMessage();
+    }
+  };
+
+  const resetMessage = () => {
+    setTimeout(() => setMessage(""), 3000);
+  };
+
   return (
     <>
       <div>
@@ -48,16 +68,25 @@ const ChallengeDetails = ({ challengeJSON }) => {
             <div className={style["challenge-main-info"]}>
               <div className={style["challenge-main-info-text"]}>
                 <h1>{challenge.title}</h1>
-
                 <p className={style["subheading"]}>{challenge.tagline}</p>
-
                 <p>{challenge.description}</p>
-
                 <div className={style.duration}>
                   <FaRegClock /> &nbsp; Duration: {challenge.days} days
                 </div>
-
-                <button>Join Challenge</button>
+                <button onClick={() => handleJoinChallenge()}>
+                  {btnContent}
+                </button>{" "}
+                {message && (
+                  <p
+                    className={`${style.loginMessage} ${
+                      isAuthenticated
+                        ? style.successMessage
+                        : style.errorMessage
+                    }`}
+                  >
+                    {message}
+                  </p>
+                )}
               </div>
               <div className={style["challenge-main-info-image"]}>
                 <img src={challenge.cardImage} alt={challenge.title} />
@@ -76,6 +105,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
                     <li key={toDo.id} className={style["todo-item"]}>
                       <label className={style["todo-label"]}>
                         <input
+                          disabled={isDisabled}
                           type="checkbox"
                           checked={checkedItemsDaily[index]}
                           onChange={() => handleCheckboxChangeDaily(index)}
@@ -107,6 +137,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
                     <li key={toDo.id} className={style["todo-item"]}>
                       <label className={style["todo-label"]}>
                         <input
+                          disabled={isDisabled}
                           type="checkbox"
                           checked={checkedItemsUnique[index]}
                           onChange={() => handleCheckboxChangeUnique(index)}
