@@ -21,6 +21,7 @@ import Auth from "./pages/Auth";
 import ScrollToHash from "./Components/ScrollToHash";
 import ScrollToTopButton from "./Components/ScrollToTopButton";
 import { useEffect, useState } from "react";
+import Profile from "./pages/Profile";
 
 function App() {
   const [challengeJSON, setChallengeJSON] = useState([]);
@@ -74,7 +75,7 @@ function App() {
       <ScrollToHash />
       <Routes location={backgroundLocation || location}>
         <Route path="/" element={<Homepage challengeJSON={challengeJSON} />} />
-        {/* <Route path="/home" element={<Homepage />} /> */}
+        <Route path="/home" element={<Homepage />} />
         <Route
           path="/challenges"
           element={
@@ -90,6 +91,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/team" element={<Team />} />
         <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
         <Route
           path="/challengedetails/:challengeId"
           element={<ChallengeDetails challengeJSON={challengeJSON} />}

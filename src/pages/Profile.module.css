@@ -1,0 +1,150 @@
+.container {
+  background-color: #faecd5;
+  padding: 70px 48px 317px;
+}
+
+.formWrapper {
+  max-width: 1070px;
+  margin: 0px auto;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.742);
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.185);
+  padding: 26px 48px;
+  background-color: white;
+}
+
+.introContent {
+  margin-bottom: 62px;
+}
+
+.heading {
+  color: black;
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.formField {
+  margin-bottom: 12px;
+}
+
+.formField label {
+  width: 100px;
+  display: inline-block;
+  line-height: 28px;
+}
+
+.formField input {
+  font-family: "Asap", sans-serif;
+  display: inline-block;
+  width: 468px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  outline: 1px solid #1c4930;
+  color: #1c4930;
+}
+
+.profileSectionHeading {
+  margin-bottom: 32px;
+  margin-top: 94px;
+}
+
+input[type="file"] {
+  border: 2px solid;
+  display: none;
+}
+
+.profileImgWrapper {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  margin-left: 24px;
+}
+
+.profileImgWrapper img,
+.avatarWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.formField .customControl {
+  width: 100%;
+}
+
+.uploadBtn {
+  border: 1px solid;
+  width: 206px;
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #1c4930;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 12px;
+  margin-bottom: 50px;
+}
+
+.customMessage {
+  margin-top: 12px;
+  display: inline-block;
+}
+
+.subHeading {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 88px;
+}
+
+.avatarWrapper {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.avatarWrapper:hover {
+  border: 2px solid #1c4930;
+}
+
+.userProfileForm button[type="submit"] {
+  width: 206px;
+  padding: 10px;
+}
+
+.formSubmitControl {
+  position: relative;
+}
+.formSubmissonMessage {
+  color: #1c4930;
+  position: absolute;
+  top: -40px;
+}
+
+@media screen and (max-width: 600px) {
+  .formWrapper {
+    padding: 32px;
+  }
+
+  .formField input {
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  .introContent {
+    margin-bottom: 32px;
+  }
+
+  .profileSectionHeading {
+    margin-top: 32px;
+  }
+}
