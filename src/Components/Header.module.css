@@ -20,7 +20,6 @@ header {
   right: 0px;
   padding: 0 46px;
   position: absolute;
-
 }
 
 .button {
@@ -54,4 +53,11 @@ header img {
   max-height: 40px;
   width: auto;
   padding-left: 24px;
+}
+
+.logoutBtn {
+  cursor: pointer;
+}
+.logoutBtn:hover {
+  font-weight: 500;
 }

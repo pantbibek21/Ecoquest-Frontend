@@ -60,3 +60,12 @@ button[type="submit"] {
   background-color: none;
   border: none;
 }
+
+.loginMessage {
+  font-size: 14px;
+  color: #62853d;
+}
+
+.errorMessage {
+  color: red;
+}

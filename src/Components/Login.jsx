@@ -1,9 +1,18 @@
 import { useState } from "react";
 import style from "../Components/loginRegister.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 const Login = ({ handleRegisterClick }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loginMessage, setLoginMessage] = useState("");
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state.from;
+
+  const { login, isAuthenticated } = useAuth();
 
   const registerHandler = () => {
     handleRegisterClick();
@@ -14,6 +23,20 @@ const Login = ({ handleRegisterClick }) => {
     console.log("submit clicked!");
     console.log("Name: " + email);
     console.log("Password: " + password);
+
+    // fake user
+    // email: bibek@gmail.com
+    // password: test@123
+
+    if (email === "bibek@gmail.com" && password === "test@123") {
+      console.log("Logged in successfully");
+      setLoginMessage("Logged in successfully!");
+      login({ userName: "Bibek" });
+      navigate("/profile");
+    } else {
+      console.log("Your email or password is incorrect!");
+      setLoginMessage("Your email or password is incorrect!");
+    }
   };
 
   return (
@@ -51,6 +74,16 @@ const Login = ({ handleRegisterClick }) => {
           <button onClick={registerHandler}>Register</button>
         </p>
       </form>
+
+      {loginMessage && (
+        <p
+          className={`${style.loginMessage} ${
+            isAuthenticated ? style.successMessage : style.errorMessage
+          }`}
+        >
+          {loginMessage}
+        </p>
+      )}
     </div>
   );
 };
