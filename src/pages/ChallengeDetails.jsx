@@ -1,41 +1,105 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
+import { useChallenge } from "../Context/ChallengeContext";
 import Header from "../Components/Header";
 import style from "../pages/ChallengeDetails.module.css";
 import "../index.css";
 import Footer from "../components/Footer";
-
 import { FaRegClock } from "react-icons/fa";
 
 const ChallengeDetails = ({ challengeJSON }) => {
   const { challengeId } = useParams();
   const { isAuthenticated } = useAuth();
-  const [message, setMessage] = useState("");
-  const [btnContent, setBtnContent] = useState("Join Challenge");
-  const [isDisabled, setIsDisabled] = useState(true);
+  const { challengeProgress } = useChallenge();
 
-  const challenge = challengeJSON.find(
+  const [message, setMessage] = useState("");
+  const [isInputDisabled, setisInputDisabled] = useState(true);
+
+  // Always render challenge details from challengeJSON (public data)
+  const challenge = challengeJSON?.find(
     (item) => item.id === Number(challengeId),
   );
 
-  if (!challenge) {
-    return <p>Challenge nicht gefunden</p>;
-  }
+  // Safe fallback so hooks don't break when challenge isn't loaded yet
+  const todos = challenge?.toDo ?? [];
 
-  const [checkedItemsDaily, setCheckedItemsDaily] = useState(
-    challenge.toDo.map(() => false),
+  const [checkedItemsDaily, setCheckedItemsDaily] = useState(() =>
+    todos.map(() => false),
   );
 
-  const handleCheckboxChangeDaily = (index) => {
+  const [checkedItemsUnique, setCheckedItemsUnique] = useState(() =>
+    todos.map(() => false),
+  );
+
+  // Progress exists only for registered challenges (private/user-specific data)
+  const progressForThisChallenge = challengeProgress?.challenges?.find(
+    (c) => c.challengeId === Number(challengeId),
+  );
+
+  // If a challenge exists in challengeProgress, it means it's registered
+  const isRegistered = Boolean(progressForThisChallenge);
+
+  const btnContent = isRegistered ? "Registered!" : "Join challenge";
+  const isBtnDisabled = isRegistered;
+
+  // When switching to a different challenge, reset checkbox arrays to correct length
+  useEffect(() => {
+    setCheckedItemsDaily(todos.map(() => false));
+    setCheckedItemsUnique(todos.map(() => false));
+  }, [challengeId, todos.length]);
+
+  // If registered, restore checked state from completedTasks
+  useEffect(() => {
+    if (!progressForThisChallenge) return;
+
+    const completedTasks = progressForThisChallenge.completedTasks ?? [];
+    const initialCheckedState = todos.map((_, index) =>
+      completedTasks.includes(index + 1),
+    );
+
+    setCheckedItemsDaily(initialCheckedState);
+  }, [progressForThisChallenge, todos]);
+
+  // Enable inputs only if registered and not completed
+  useEffect(() => {
+    if (!isRegistered) {
+      setisInputDisabled(true);
+      return;
+    }
+
+    const status = progressForThisChallenge?.status;
+    if (status === "Completed") setisInputDisabled(true);
+    else setisInputDisabled(false); // Registered or Ongoing
+  }, [isRegistered, progressForThisChallenge]);
+
+  const postChallengeTask = async (ChallengeTaskId, status) => {
+    const ChallengeTaskAPI = "http://localhost:3000/challenges/progress";
+
+    const response = await fetch(ChallengeTaskAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: 2,
+        challengeId: Number(challengeId),
+        taskId: ChallengeTaskId,
+        completed: status,
+      }),
+    });
+
+    console.log(response.status);
+  };
+
+  const handleCheckboxChangeDaily = async (index) => {
     const updated = [...checkedItemsDaily];
     updated[index] = !updated[index];
     setCheckedItemsDaily(updated);
-  };
 
-  const [checkedItemsUnique, setCheckedItemsUnique] = useState(
-    challenge.toDo.map(() => false),
-  );
+    // POST single task completion to backend
+    postChallengeTask(index + 1, updated[index]);
+  };
 
   const handleCheckboxChangeUnique = (index) => {
     const updated = [...checkedItemsUnique];
@@ -43,21 +107,38 @@ const ChallengeDetails = ({ challengeJSON }) => {
     setCheckedItemsUnique(updated);
   };
 
-  const handleJoinChallenge = () => {
+  const resetMessage = () => {
+    setTimeout(() => setMessage(""), 3000);
+  };
+
+  const handleJoinChallenge = async () => {
     if (isAuthenticated) {
       setMessage("Challenge registered!🥳");
       resetMessage();
-      setBtnContent("Registered!");
-      setIsDisabled(false);
+
+      const challengeRegisterAPI = "http://localhost:3000/challenges/register";
+
+      const response = await fetch(challengeRegisterAPI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: 2,
+          challengeId: Number(challengeId),
+        }),
+      });
+
+      console.log(response.status);
     } else {
       setMessage("You need to be logged in first 🙂!");
       resetMessage();
     }
   };
 
-  const resetMessage = () => {
-    setTimeout(() => setMessage(""), 3000);
-  };
+  if (!challenge) {
+    return <p>Challenge nicht gefunden</p>;
+  }
 
   return (
     <>
@@ -73,7 +154,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
                 <div className={style.duration}>
                   <FaRegClock /> &nbsp; Duration: {challenge.days} days
                 </div>
-                <button onClick={() => handleJoinChallenge()}>
+                <button onClick={handleJoinChallenge} disabled={isBtnDisabled}>
                   {btnContent}
                 </button>{" "}
                 {message && (
@@ -88,6 +169,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
                   </p>
                 )}
               </div>
+
               <div className={style["challenge-main-info-image"]}>
                 <img src={challenge.cardImage} alt={challenge.title} />
               </div>
@@ -100,14 +182,15 @@ const ChallengeDetails = ({ challengeJSON }) => {
                   Check off at least one task a day to keep up your daily
                   streak.
                 </p>
+
                 <ul className={style["todo-list"]}>
-                  {challenge.toDo.map((toDo, index) => (
+                  {todos.map((toDo, index) => (
                     <li key={toDo.id} className={style["todo-item"]}>
                       <label className={style["todo-label"]}>
                         <input
-                          disabled={isDisabled}
+                          disabled={isInputDisabled}
                           type="checkbox"
-                          checked={checkedItemsDaily[index]}
+                          checked={checkedItemsDaily[index] || false}
                           onChange={() => handleCheckboxChangeDaily(index)}
                           className={style["todo-checkbox"]}
                         />
@@ -132,14 +215,15 @@ const ChallengeDetails = ({ challengeJSON }) => {
                   Finish these tasks for a point boost and a create a lasting
                   impact.
                 </p>
+
                 <ul className={style["todo-list"]}>
-                  {challenge.toDo.map((toDo, index) => (
+                  {todos.map((toDo, index) => (
                     <li key={toDo.id} className={style["todo-item"]}>
                       <label className={style["todo-label"]}>
                         <input
-                          disabled={isDisabled}
+                          disabled={isInputDisabled}
                           type="checkbox"
-                          checked={checkedItemsUnique[index]}
+                          checked={checkedItemsUnique[index] || false}
                           onChange={() => handleCheckboxChangeUnique(index)}
                           className={style["todo-checkbox"]}
                         />

@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "../Components/loginRegister.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import { useChallenge } from "../Context/ChallengeContext";
 
 const Login = ({ handleRegisterClick }) => {
   const [email, setEmail] = useState("bibek@gmail.com");
@@ -13,9 +14,23 @@ const Login = ({ handleRegisterClick }) => {
   const from = location.state.from;
 
   const { login, isAuthenticated } = useAuth();
+  const { saveChallengeProgress } = useChallenge();
 
   const registerHandler = () => {
     handleRegisterClick();
+  };
+
+  const fetchUserProgress = async () => {
+    const challengeProgressAPI = "http://localhost:3000/challenges/progress/2";
+    const response = await fetch(challengeProgressAPI);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const data = await response.json();
+    saveChallengeProgress(data);
+    console.log("Challange progress", data);
   };
 
   const submitHandler = (e) => {
@@ -32,6 +47,9 @@ const Login = ({ handleRegisterClick }) => {
       console.log("Logged in successfully");
       setLoginMessage("Logged in successfully!");
       login({ userName: "Bibek" });
+
+      // fetch the progress of the user and store in global context
+      fetchUserProgress();
       navigate("/profile");
     } else {
       console.log("Your email or password is incorrect!");
