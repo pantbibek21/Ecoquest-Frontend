@@ -1,20 +1,48 @@
 import { useState } from "react";
 import style from "../Components/loginRegister.module.css";
 
-const Register = ({ handleLoginClick }) => {
+const Register = ({ handleLoginClick, setIsLoginActive }) => {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [username, setUserName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [registerMessage, setRegisterMessage] = useState("");
 
   const loginHandler = () => {
     handleLoginClick();
   };
 
+  const registerUser = async () => {
+    const userRegisterAPI = "http://localhost:3000/users/signup";
+
+    const response = await fetch(userRegisterAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (response.ok) {
+      setRegisterMessage(
+        "Congrats! 🥳 You are successfully registered! Login now!",
+      );
+      setTimeout(() => setIsLoginActive(true), 3000);
+    }
+
+    console.log(response.status);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("submit clicked!");
+    registerUser();
   };
 
   return (
@@ -76,6 +104,9 @@ const Register = ({ handleLoginClick }) => {
           Already have an account? <button onClick={loginHandler}>Login</button>
         </p>
       </form>
+      {registerMessage && (
+        <p className={`${style.loginMessage}`}>{registerMessage}</p>
+      )}
     </div>
   );
 };

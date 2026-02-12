@@ -35,7 +35,12 @@ const Auth = () => {
   return (
     <>
       <Overlay onClose={handleClose}>
-        {!isLoginActive && <Register handleLoginClick={handleLoginClick} />}
+        {!isLoginActive && (
+          <Register
+            handleLoginClick={handleLoginClick}
+            setIsLoginActive={setIsLoginActive}
+          />
+        )}
         {isLoginActive && <Login handleRegisterClick={handleRegisterClick} />}
       </Overlay>
     </>
