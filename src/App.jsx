@@ -22,6 +22,7 @@ import ScrollToHash from "./Components/ScrollToHash";
 import ScrollToTopButton from "./Components/ScrollToTopButton";
 import { useEffect, useState } from "react";
 import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const [challengeJSON, setChallengeJSON] = useState([]);
@@ -92,6 +93,7 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard challengeJSON={challengeJSON} />} />
         <Route
           path="/challengedetails/:challengeId"
           element={<ChallengeDetails challengeJSON={challengeJSON} />}

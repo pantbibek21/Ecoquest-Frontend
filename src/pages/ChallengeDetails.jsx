@@ -6,7 +6,7 @@ import Header from "../Components/Header";
 import style from "../pages/ChallengeDetails.module.css";
 import "../index.css";
 import Footer from "../components/Footer";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaCheckCircle, FaFire } from "react-icons/fa";
 
 const ChallengeDetails = ({ challengeJSON }) => {
   const { challengeId } = useParams();
@@ -21,15 +21,17 @@ const ChallengeDetails = ({ challengeJSON }) => {
     (item) => item.id === Number(challengeId),
   );
 
+
   // Safe fallback so hooks don't break when challenge isn't loaded yet
-  const todos = challenge?.toDo ?? [];
+  const dailyToDos = challenge?.dailyToDo ?? [];
+  const uniqueToDos = challenge?.uniqueToDo ?? [];
 
   const [checkedItemsDaily, setCheckedItemsDaily] = useState(() =>
-    todos.map(() => false),
+    dailyToDos.map(() => false),
   );
 
   const [checkedItemsUnique, setCheckedItemsUnique] = useState(() =>
-    todos.map(() => false),
+    uniqueToDos.map(() => false),
   );
 
   // Progress exists only for registered challenges (private/user-specific data)
@@ -43,23 +45,58 @@ const ChallengeDetails = ({ challengeJSON }) => {
   const btnContent = isRegistered ? "Registered!" : "Join challenge";
   const isBtnDisabled = isRegistered;
 
+    // Placeholder values until fields are added to MongoDB
+  const streak = progressForThisChallenge?.streak ?? 0;
+
+    //Calculate progress for challenge
+  const calculateProgress = () => {
+  if (!challenge || !progressForThisChallenge?.startedAt) return 0;
+
+  const start = new Date(progressForThisChallenge.startedAt);
+  const today = new Date();
+
+  const diffTime = today - start;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  const progress = Math.min(
+    (diffDays / challenge.days) * 100,
+    100
+  );
+
+  return Math.max(progress, 0);
+};
+
+  const progressPercent = calculateProgress();
+
+  // Placeholder value until field is added to MongoDB
+  const totalCompleted = 10;
+
+
   // When switching to a different challenge, reset checkbox arrays to correct length
   useEffect(() => {
-    setCheckedItemsDaily(todos.map(() => false));
-    setCheckedItemsUnique(todos.map(() => false));
-  }, [challengeId, todos.length]);
+    setCheckedItemsDaily(dailyToDos.map(() => false));
+    setCheckedItemsUnique(uniqueToDos.map(() => false));
+  }, [challengeId, dailyToDos.length, uniqueToDos.length]);
 
   // If registered, restore checked state from completedTasks
   useEffect(() => {
     if (!progressForThisChallenge) return;
 
     const completedTasks = progressForThisChallenge.completedTasks ?? [];
-    const initialCheckedState = todos.map((_, index) =>
+    const initialCheckedStateDaily = dailyToDos.map((_, index) =>
       completedTasks.includes(index + 1),
     );
 
-    setCheckedItemsDaily(initialCheckedState);
-  }, [progressForThisChallenge, todos]);
+    const initialCheckedStateUnique = uniqueToDos.map((_, index) =>
+      completedTasks.includes(index + 1),
+    );
+
+    setCheckedItemsDaily(initialCheckedStateDaily);
+    setCheckedItemsUnique(initialCheckedStateUnique);
+  }, [progressForThisChallenge, dailyToDos, uniqueToDos]);
+
+
+
 
   // Enable inputs only if registered and not completed
   useEffect(() => {
@@ -136,6 +173,25 @@ const ChallengeDetails = ({ challengeJSON }) => {
     }
   };
 
+  // Countdown bis Mitternacht
+  const [timeLeft, setTimeLeft] = useState("");
+
+  const getTimeUntilMidnight = () => {
+  const now = new Date();
+  const midnight = new Date();
+
+  midnight.setHours(24, 0, 0, 0);
+
+  const diff = midnight - now;
+
+  const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, "0");
+  const minutes = String(
+    Math.floor((diff / (1000 * 60)) % 60)
+  ).padStart(2, "0");
+
+  return { diff, formatted: `${hours}:${minutes}` };
+  };
+
   if (!challenge) {
     return <p>Challenge nicht gefunden</p>;
   }
@@ -168,12 +224,52 @@ const ChallengeDetails = ({ challengeJSON }) => {
                     {message}
                   </p>
                 )}
-              </div>
 
+                {isAuthenticated && isRegistered && (
+              <><div className={style.progressSection}>
+                    <h3>Fortschritt</h3>
+
+                    <div className={style.progressBarWrapper}>
+                      <div
+                        className={style.progressBar}
+                        style={{ width: `${progressPercent}%` }} />
+                    </div>
+
+                    <p className={style.progressPercent}>
+                      {Math.round(progressPercent)} %
+                    </p>
+                  </div><div className={style.statsRow}>
+                      <div className={style.stats}>
+                        <div className={style.iconWrapper}>
+                        <FaCheckCircle color="#62853D" size="32px"/> 
+                        </div>
+                        <div className={style.statsLabel}>
+                        <p>Completed To Dos</p>
+                        <strong>{totalCompleted}</strong>
+                        </div>
+                      </div>
+
+                      <div className={style.stats}>
+                        <div className={style.iconWrapper}>
+                        <FaFire color="#BC8630" size="32px"/>
+                        </div>
+                        <div className={style.statsLabel}>
+                         <p>Streak</p><strong>{streak}</strong>
+                         </div>
+                      </div>
+                    </div></>
+
+              )}
+
+              </div>
+                
               <div className={style["challenge-main-info-image"]}>
                 <img src={challenge.cardImage} alt={challenge.title} />
               </div>
+              
             </div>
+
+
 
             <div className={style["challenge-todos"]}>
               <div className="daily-todos-section">
@@ -182,10 +278,13 @@ const ChallengeDetails = ({ challengeJSON }) => {
                   Check off at least one task a day to keep up your daily
                   streak.
                 </p>
+                <p className={style["countdown"]}>
+                  Your Daily To Dos will be reset in <strong>{getTimeUntilMidnight().formatted} hours</strong>
+                </p>
 
                 <ul className={style["todo-list"]}>
-                  {todos.map((toDo, index) => (
-                    <li key={toDo.id} className={style["todo-item"]}>
+                  {dailyToDos.map((dailyToDo, index) => (
+                    <li key={dailyToDo.id} className={style["todo-item"]}>
                       <label className={style["todo-label"]}>
                         <input
                           disabled={isInputDisabled}
@@ -201,7 +300,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
                               : style["todo-text"]
                           }
                         >
-                          {toDo.text}
+                          {dailyToDo.text}
                         </span>
                       </label>
                     </li>
@@ -217,8 +316,8 @@ const ChallengeDetails = ({ challengeJSON }) => {
                 </p>
 
                 <ul className={style["todo-list"]}>
-                  {todos.map((toDo, index) => (
-                    <li key={toDo.id} className={style["todo-item"]}>
+                  {uniqueToDos.map((uniqueToDo, index) => (
+                    <li key={uniqueToDo.id} className={style["todo-item"]}>
                       <label className={style["todo-label"]}>
                         <input
                           disabled={isInputDisabled}
@@ -234,7 +333,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
                               : style["todo-text"]
                           }
                         >
-                          {toDo.text}
+                          {uniqueToDo.text}
                         </span>
                       </label>
                     </li>

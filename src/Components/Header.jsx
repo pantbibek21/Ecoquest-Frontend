@@ -3,10 +3,11 @@ import style from "../Components/Header.module.css";
 import Navigation from "./Navigation.jsx";
 import Logo from "../Assets/logo.png";
 import { useAuth } from "../Context/AuthContext.jsx";
+import UserMenu from "./UserMenu.jsx";
 
 const Header = () => {
   const location = useLocation();
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   console.log(user);
   console.log(isAuthenticated);
 
@@ -20,17 +21,12 @@ const Header = () => {
         </nav>
         <div>
           <Link to="/">
-            <img className="headerlogo" src={Logo} alt="Logo of EcoQuest" />
+            <img className={style.headerlogo} src={Logo} alt="Logo of EcoQuest" />
           </Link>
         </div>
         <div className={style.buttons}>
           {isAuthenticated && (
-            <p>
-              Welcome back, {user["userName"]} |{" "}
-              <span onClick={logout} className={style.logoutBtn}>
-                Logout
-              </span>
-            </p>
+            < UserMenu />
           )}
           {!isAuthenticated && (
             <>

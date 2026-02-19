@@ -50,7 +50,7 @@ const Login = ({ handleRegisterClick }) => {
 
       // fetch the progress of the user and store in global context
       fetchUserProgress();
-      navigate("/profile");
+      navigate("/dashboard");
     } else {
       console.log("Your email or password is incorrect!");
       setLoginMessage("Your email or password is incorrect!");
