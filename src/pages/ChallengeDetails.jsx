@@ -63,24 +63,24 @@ const ChallengeDetails = ({ challengeJSON }) => {
   const streak = progressForThisChallenge?.streak ?? 0;
 
   //Calculate progress for challenge
-  const calculateProgress = () => {
-    if (!challenge || !progressForThisChallenge?.startedAt) return 0;
+  const progressPercent = useMemo(() => {
+    const totalTasks = checkedItemsDaily.length + checkedItemsUnique.length;
+    if (totalTasks === 0) return 0;
 
-    const start = new Date(progressForThisChallenge.startedAt);
-    const today = new Date();
+    const completedCount =
+      checkedItemsDaily.filter(Boolean).length +
+      checkedItemsUnique.filter(Boolean).length;
 
-    const diffTime = today - start;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    const progress = Math.min((diffDays / challenge.days) * 100, 100);
-
-    return Math.max(progress, 0);
-  };
-
-  const progressPercent = calculateProgress();
+    return Math.min((completedCount / totalTasks) * 100, 100);
+  }, [checkedItemsDaily, checkedItemsUnique]);
 
   // Placeholder value until field is added to MongoDB
-  const totalCompleted = 10;
+  const totalCompleted = useMemo(() => {
+    return (
+      checkedItemsDaily.filter(Boolean).length +
+      checkedItemsUnique.filter(Boolean).length
+    );
+  }, [checkedItemsDaily, checkedItemsUnique]);
 
   // When switching to a different challenge, reset checkbox arrays to correct length
   useEffect(() => {
