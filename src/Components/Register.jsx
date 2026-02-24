@@ -16,30 +16,50 @@ const Register = ({ handleLoginClick, setIsLoginActive }) => {
   const registerUser = async () => {
     const userRegisterAPI = "http://localhost:3000/users/signup";
 
-    const response = await fetch(userRegisterAPI, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
-        email: email,
-        password: password,
-      }),
-    });
+    try {
+      const response = await fetch(userRegisterAPI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          userName: username,
+          email,
+          password,
+        }),
+      });
 
-    if (response.ok) {
+      // Try to read response body safely
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = null;
+      }
+
+      if (response.ok) {
+        setRegisterMessage(
+          "Congrats! 🥳 You are successfully registered! Login now!",
+        );
+
+        setTimeout(() => setIsLoginActive(true), 3000);
+        return;
+      }
+
+      const errorMessage =
+        data?.message || `Registration failed (Status ${response.status})`;
+
+      setRegisterMessage(errorMessage);
+    } catch (error) {
+      console.error("Network error:", error);
+
       setRegisterMessage(
-        "Congrats! 🥳 You are successfully registered! Login now!",
+        "Unable to connect to server. Please try again later.",
       );
-      setTimeout(() => setIsLoginActive(true), 3000);
     }
-
-    console.log(response.status);
   };
-
   const submitHandler = (e) => {
     e.preventDefault();
     registerUser();

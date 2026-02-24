@@ -5,32 +5,90 @@ import { useAuth } from "../Context/AuthContext";
 import { useChallenge } from "../Context/ChallengeContext";
 
 const Login = ({ handleRegisterClick }) => {
-  const [email, setEmail] = useState("bibek@gmail.com");
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("jack@gmail.com");
+  const [password, setPassword] = useState("iamjack");
   const [loginMessage, setLoginMessage] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state.from;
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   const { saveChallengeProgress } = useChallenge();
 
   const registerHandler = () => {
     handleRegisterClick();
   };
 
-  const fetchUserProgress = async () => {
-    const challengeProgressAPI = "http://localhost:3000/challenges/progress/2";
+  const fetchUserProgress = async (userId) => {
+    console.log(user);
+    const challengeProgressAPI = `http://localhost:3000/challenges/progress/${userId}`;
     const response = await fetch(challengeProgressAPI);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch data");
+    // }
 
     const data = await response.json();
+    console.log(data);
     saveChallengeProgress(data);
     console.log("Challange progress", data);
+  };
+
+  const loginUser = async () => {
+    const userLoginAPI = "http://localhost:3000/users/login";
+
+    try {
+      const response = await fetch(userLoginAPI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password, // keep as string (recommended)
+        }),
+      });
+
+      // Safely parse JSON (backend might not always return JSON)
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = null;
+      }
+
+      // ✅ Success
+      if (response.ok) {
+        setLoginMessage("Logged in successfully! 🥳");
+
+        console.log(data);
+
+        // Use backend user data if available; fallback if not
+        login({
+          userName: data.user.userName,
+          userId: data.user.id,
+        });
+
+        await fetchUserProgress(data.user.id);
+
+        navigate("/dashboard");
+        return;
+      }
+
+      // ❌ HTTP error (e.g., 401, 400, 500)
+      const message =
+        data?.message ||
+        (response.status === 401
+          ? "Invalid email or password."
+          : `Failed to login (Status ${response.status})`);
+
+      setLoginMessage(message);
+    } catch (error) {
+      // ❌ Network error / fetch failed
+      console.error("Login error:", error);
+      setLoginMessage("Unable to reach the server. Please try again later.");
+    }
   };
 
   const submitHandler = (e) => {
@@ -38,23 +96,7 @@ const Login = ({ handleRegisterClick }) => {
     console.log("submit clicked!");
     console.log("Name: " + email);
     console.log("Password: " + password);
-
-    // fake user
-    // email: bibek@gmail.com
-    // password: test@123
-
-    if (email === "bibek@gmail.com" && password === "bibek") {
-      console.log("Logged in successfully");
-      setLoginMessage("Logged in successfully!");
-      login({ userName: "Bibek" });
-
-      // fetch the progress of the user and store in global context
-      fetchUserProgress();
-      navigate("/dashboard");
-    } else {
-      console.log("Your email or password is incorrect!");
-      setLoginMessage("Your email or password is incorrect!");
-    }
+    loginUser();
   };
 
   return (
