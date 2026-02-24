@@ -76,7 +76,7 @@ function App() {
       <ScrollToHash />
       <Routes location={backgroundLocation || location}>
         <Route path="/" element={<Homepage challengeJSON={challengeJSON} />} />
-        <Route path="/home" element={<Homepage />} />
+
         <Route
           path="/challenges"
           element={
@@ -93,7 +93,10 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/dashboard" element={<Dashboard challengeJSON={challengeJSON} />} />
+        <Route
+          path="/dashboard"
+          element={<Dashboard challengeJSON={challengeJSON} />}
+        />
         <Route
           path="/challengedetails/:challengeId"
           element={<ChallengeDetails challengeJSON={challengeJSON} />}
