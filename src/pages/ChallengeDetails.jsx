@@ -8,6 +8,7 @@ import "../index.css";
 import Footer from "../components/Footer";
 import { FaRegClock, FaCheckCircle, FaFire } from "react-icons/fa";
 
+
 const ChallengeDetails = ({ challengeJSON }) => {
   const { challengeId } = useParams();
   const { isAuthenticated, user } = useAuth();

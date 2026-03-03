@@ -59,22 +59,37 @@ const Login = ({ handleRegisterClick }) => {
       }
 
       // ✅ Success
-      if (response.ok) {
-        setLoginMessage("Logged in successfully! 🥳");
+if (response.ok) {
+  setLoginMessage("Logged in successfully! 🥳");
 
-        console.log(data);
+  console.log("FULL LOGIN RESPONSE:", data);
 
-        // Use backend user data if available; fallback if not
-        login({
-          userName: data.user.userName,
-          userId: data.user.id,
-        });
+  if (!data) {
+    setLoginMessage("Invalid server response.");
+    return;
+  }
 
-        await fetchUserProgress(data.user.id);
+  const userId = data.userId ?? data.user?.userId;
+  const userName = data.userName ?? data.user?.userName;
 
-        navigate("/dashboard");
-        return;
-      }
+  console.log("Extracted userId:", userId);
+  console.log("Extracted userName:", userName);
+
+  if (!userId) {
+    setLoginMessage("Login response missing userId.");
+    return;
+  }
+
+  login({
+    userName,
+    userId,
+  });
+
+  await fetchUserProgress(userId);
+
+  navigate("/dashboard");
+  return;
+}
 
       // ❌ HTTP error (e.g., 401, 400, 500)
       const message =
