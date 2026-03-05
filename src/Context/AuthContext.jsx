@@ -13,13 +13,12 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = (userData) => {
-    console.log("LOGIN RECEIVED IN CONTEXT:", userData);
-    setIsAuthenticated(true);
+   const login = (userData) => {
     setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
+
   const logout = () => {
-    setIsAuthenticated(false);
     setUser(null);
     localStorage.removeItem("user");
   };
