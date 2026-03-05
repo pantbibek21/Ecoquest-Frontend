@@ -2,16 +2,18 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useChallenge } from "../Context/ChallengeContext";
+import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import style from "../pages/ChallengeDetails.module.css";
 import "../index.css";
 import Footer from "../Components/Footer";
-import { FaRegClock, FaCheckCircle, FaFire, FaMeteor, FaStar } from "react-icons/fa";
+import { FaChevronCircleLeft, FaRegClock, FaCheckCircle, FaFire, FaMeteor, FaStar } from "react-icons/fa";
 
 
 const ChallengeDetails = ({ challengeJSON }) => {
   const { challengeId } = useParams();
   const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
 
   // NOTE: If your ChallengeContext exposes a refresh function, we use it.
   // If not, this code still works because we have localRegistered.
@@ -180,6 +182,29 @@ const ChallengeDetails = ({ challengeJSON }) => {
     }
   };
 
+  
+  // Floating points 
+  const [floatingPoints, setFloatingPoints] = useState([]);
+
+  const handleCompleteTodo = (todoId, type, isAdding) => {
+    const points = type === "unique" ? 10 : 1;
+    const finalPoints = isAdding ? points : - points;
+
+    const newPoint = {
+      id: Date.now(),
+      points: finalPoints,
+      todoId,
+  };
+
+  setFloatingPoints((prev) => [...prev, newPoint]);
+
+  setTimeout(() => {
+    setFloatingPoints((prev) =>
+      prev.filter((p) => p.id !== newPoint.id)
+    );
+  }, 1200);
+};
+
   const handleCheckboxChangeDaily = async (index) => {
     const updated = [...checkedItemsDaily];
     updated[index] = !updated[index];
@@ -187,6 +212,12 @@ const ChallengeDetails = ({ challengeJSON }) => {
 
     const taskId = dailyToDos[index]?.id; // ✅ real id
     if (taskId == null) return;
+
+    handleCompleteTodo(
+      dailyToDos[index].id,
+      "daily",
+      updated[index]
+    );
 
     postChallengeTask(taskId, updated[index], "daily");
   };
@@ -199,8 +230,14 @@ const ChallengeDetails = ({ challengeJSON }) => {
     const taskId = uniqueToDos[index]?.id; // ✅ real id
     if (taskId == null) return;
 
+    handleCompleteTodo(
+      uniqueToDos[index].id,
+      "unique",
+      updated[index]
+    );
+
     postChallengeTask(taskId, updated[index], "unique");
-  };
+    };
 
   const handleJoinChallenge = async () => {
     if (!isAuthenticated) {
@@ -280,6 +317,10 @@ const ChallengeDetails = ({ challengeJSON }) => {
         <Header />
         <div className={style.spacer}>
           <div className={style["content-container"]}>
+            <div className={style.backBtn} onClick={() => {
+              navigate("/dashboard");}}>
+              <FaChevronCircleLeft /> Zurück zum Dashboard
+            </div>
             <div className={style["challenge-main-info"]}>
               <div className={style["challenge-main-info-text"]}>
                 <h1>{challenge.title}</h1>
@@ -451,6 +492,18 @@ const ChallengeDetails = ({ challengeJSON }) => {
                           {dailyToDo.text}
                         </span>
                       </label>
+                      {floatingPoints
+                        .filter((p) => p.todoId === dailyToDo.id)
+                        .map((p) => (
+                          <span
+                            key={p.id}
+                            className={`${style.floatingPoints} ${
+                              p.points > 0 ? style.positive : style.negative
+                            }`}
+                          >
+                            {p.points > 0 ? "+" : ""}{p.points} points
+                          </span>
+                      ))}
                     </li>
                   ))}
                 </ul>
@@ -484,6 +537,19 @@ const ChallengeDetails = ({ challengeJSON }) => {
                           {uniqueToDo.text}
                         </span>
                       </label>
+
+                      {floatingPoints
+                        .filter((p) => p.todoId === uniqueToDo.id)
+                        .map((p) => (
+                          <span
+                            key={p.id}
+                            className={`${style.floatingPoints} ${
+                              p.points > 0 ? style.positive : style.negative
+                            }`}
+                          >
+                            {p.points > 0 ? "+" : ""}{p.points} points
+                          </span>
+                      ))}
                     </li>
                   ))}
                 </ul>

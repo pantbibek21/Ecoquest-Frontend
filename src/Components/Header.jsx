@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import style from "../Components/Header.module.css";
 import Navigation from "./Navigation.jsx";
 import Logo from "../Assets/logo.png";
+import Favicon from "../Assets/favicon.png";
 import { useAuth } from "../Context/AuthContext.jsx";
 import UserMenu from "./UserMenu.jsx";
 
@@ -21,7 +22,10 @@ const Header = () => {
         </nav>
         <div>
           <Link to="/">
-            <img className={style.headerlogo} src={Logo} alt="Logo of EcoQuest" />
+            <img className={style.headerlogoFull} src={Logo} alt="Logo of EcoQuest" />
+          </Link>
+          <Link to="/">
+            <img className={style.headerlogoSmall} src={Favicon} alt="Logo of EcoQuest" />
           </Link>
         </div>
         <div className={style.buttons}>

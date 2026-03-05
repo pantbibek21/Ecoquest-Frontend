@@ -49,10 +49,27 @@ header {
   background-color: #567535;
 }
 
-.headerlogo {
+.headerlogoFull {
   max-height: 40px;
   width: auto;
   padding-left: 24px;
+}
+
+.headerlogoSmall {
+  display: none;
+}
+
+@media screen and (max-width: 472px) {
+  .headerlogoFull {
+    display: none;
+  }
+
+  .headerlogoSmall {
+    display: block;
+    max-height: 40px;
+    width: auto;
+    padding-left: 24px;
+  }
 }
 
 .logoutBtn {

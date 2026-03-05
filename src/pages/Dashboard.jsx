@@ -6,6 +6,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import style from "./Dashboard.module.css";
 import welcome from "../Assets/welcome.png";
+import { FaChevronCircleRight } from "react-icons/fa";
 
 const Dashboard = ({ challengeJSON }) => {
   const { user, isAuthenticated } = useAuth();
@@ -86,11 +87,11 @@ const Dashboard = ({ challengeJSON }) => {
                     <label className={style.todoLabel}>
                       <input type="checkbox" className={style.todoCheckbox} />
                       <span>
-                        {task.text} (from:{" "}
+                        {task.text} <br />
+                        <FaChevronCircleRight color="#33240a" size="12px" /> go to { }
                         <Link to={`/challengedetails/${task.challengeId}`}>
                           {task.challengeTitle}
-                        </Link>
-                        )
+                        </Link> 
                       </span>
                     </label>
                   </li>

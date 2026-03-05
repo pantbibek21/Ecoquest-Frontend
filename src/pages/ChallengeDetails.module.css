@@ -3,6 +3,16 @@
   padding: 86px 46px 122px;
 }
 
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  color: #33240a;
+  cursor: pointer;
+}
+
 .content-container {
   max-width: 1342px;
   margin: 0 auto;
@@ -47,7 +57,8 @@
 
 .challenge-main-info button {
   display: block;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   padding: 9px;
   margin: 9px 0px;
   text-align: center;
@@ -56,7 +67,6 @@
   color: #faecd5;
   background-color: #62853d;
   border: none;
-  outline: 2px solid #62853d;
   transition: all 0.2s ease;
   font-size: 14px;
 }
@@ -236,6 +246,15 @@
   .challenge-todos {
     flex-wrap: wrap;
   }
+
+  .todoProgress {
+    flex-wrap: wrap;
+    gap: 0px;
+  }
+
+  .statsRow {
+    flex-wrap: wrap;
+  }
 }
 
 .todo-list {
@@ -246,11 +265,12 @@
 
 .todo-item {
   margin-bottom: 8px;
+  position: relative;
 }
 
 .todo-label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   cursor: pointer;
 }
@@ -262,6 +282,7 @@
 
 .todo-checkbox {
   width: 20px;
+  min-width: 20px;
   height: 20px;
   border-radius: 100%;
   border: 2px solid #1c4930;
@@ -269,6 +290,38 @@
   accent-color: #1c4930;
   cursor: pointer;
   position: relative;
+}
+
+.floatingPoints {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: bold;
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+.positive {
+  color: #2f6f4e;
+}
+
+.negative {
+  color: #c0392b;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 }
 
 .duration {
