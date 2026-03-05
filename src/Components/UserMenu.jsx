@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import style from "./UserMenu.module.css";
 import { FaChevronDown } from "react-icons/fa";
-import BibekImg from "../Assets/BibekTeamImg.jpg";
+import AvatarBee from "../Assets/AvatarBee.png";
 
 const UserMenu = () => {
   const { user, logout } = useAuth();
@@ -56,7 +56,7 @@ const UserMenu = () => {
       onMouseEnter={handleMouseEnter}
     >
       <div className={style.trigger} ref={triggerRef} onClick={toggleMenu}>
-        Welcome back, {user.userName} <img src={BibekImg} alt="User Profile" className={style.userImage} /> <FaChevronDown />
+        Welcome back, {user.firstName} <img src={AvatarBee} alt="User Profile" className={style.userImage} /> <FaChevronDown />
       </div>
 
       {isOpen && (

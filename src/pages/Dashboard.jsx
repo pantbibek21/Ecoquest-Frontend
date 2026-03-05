@@ -3,7 +3,7 @@ import { useChallenge } from "../Context/ChallengeContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Header from "../Components/Header";
-import Footer from "../components/Footer";
+import Footer from "../Components/Footer";
 import style from "./Dashboard.module.css";
 import welcome from "../Assets/welcome.png";
 
@@ -13,7 +13,7 @@ const Dashboard = ({ challengeJSON }) => {
   const navigate = useNavigate();
 
   if (!isAuthenticated) {
-    navigate("/login");
+    navigate("/");
     return null;
   }
 
@@ -57,7 +57,7 @@ const Dashboard = ({ challengeJSON }) => {
         <div className={style.container}>
           <div className={style.welcomeSection}>
             <div>
-              <h1>Welcome back, {user.userName}!</h1>
+              <h1>Welcome back, {user.firstName}!</h1>
               <p>
                 We hope you're having a great day and we're so glad to have you
                 back. Here's everything that's on your To Do List.

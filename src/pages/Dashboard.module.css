@@ -75,7 +75,7 @@
 .cardWrapper {
   margin: 32px 0px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   gap: 32px;
 }
 

@@ -69,8 +69,20 @@
   margin-top: 30px;
 }
 
+.todoProgress {
+  display: flex;
+  justify-content: left;
+  gap: 50px;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .progressBarWrapper {
-  width: 100%;
+  flex: 1;
   height: 10px;
   background-color: #e5e5e5;
   border-radius: 10px;
@@ -85,15 +97,112 @@
 }
 
 .progressPercent {
-  margin-top: 8px;
+  margin-top: 10px;
   font-weight: 500;
 }
+
+.dayTag {
+  margin: 0;
+  display: inline-block;
+  background-color: #2f6f4e;
+  color: #e5e5e5;
+  padding: 0px 10px;
+  border-radius: 50px;
+  font-size: 0.8em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+.dailyProgressSection {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.progressCircle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+    background: conic-gradient(
+      #2f6f4e var(--progress),
+      #e5e5e5 0%
+    );
+
+  transition: --progress 0.5s ease;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+@property --progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.progressCircle::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+}
+
+.progressCircleLabel {
+  position: relative;
+  font-weight: 600;
+  color: #2f6f4e;
+  font-size: 0.8rem;
+}
+
+
+.uniqueProgressSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.uniqueDots {
+  display: flex;
+  gap: 6px;
+}
+
+.dotFilled,
+.dotEmpty {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotFilled {
+  background-color: #2f6f4e;
+  transition: background-color 0.5s ease;
+}
+
+.dotEmpty {
+  background-color: #e5e5e5;
+}
+
+.uniqueCounter {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
 
 .statsRow {
   display: flex;
   gap: 40px;
   margin-top: 20px;
-  align-items: center;
+  align-items: left;
+  justify-content: space-between;
 }
 
 .stats {

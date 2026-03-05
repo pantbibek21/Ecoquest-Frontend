@@ -5,8 +5,8 @@ import { useChallenge } from "../Context/ChallengeContext";
 import Header from "../Components/Header";
 import style from "../pages/ChallengeDetails.module.css";
 import "../index.css";
-import Footer from "../components/Footer";
-import { FaRegClock, FaCheckCircle, FaFire } from "react-icons/fa";
+import Footer from "../Components/Footer";
+import { FaRegClock, FaCheckCircle, FaFire, FaMeteor, FaStar } from "react-icons/fa";
 
 
 const ChallengeDetails = ({ challengeJSON }) => {
@@ -51,29 +51,62 @@ const ChallengeDetails = ({ challengeJSON }) => {
 
   console.log(JSON.stringify(challengeProgress));
 
+  const currentStreak = progressForThisChallenge?.currentStreak ?? 0;
+  const highestStreak = progressForThisChallenge?.highestStreak ?? 0;
+  const points = progressForThisChallenge?.points ?? 0;
+
   // If a challenge exists in challengeProgress, it means it's registered
   const isRegisteredFromContext = Boolean(progressForThisChallenge);
 
   // ✅ single source of truth for rendering
   const registered = isRegisteredFromContext || localRegistered;
 
-  const btnContent = registered ? "Registered!" : "Join challenge";
-  const isBtnDisabled = registered;
-
-  // Placeholder values until fields are added to MongoDB
-  const streak = progressForThisChallenge?.streak ?? 0;
 
   //Calculate progress for challenge
-  const progressPercent = useMemo(() => {
-    const totalTasks = checkedItemsDaily.length + checkedItemsUnique.length;
+  const calculateProgress = () => {
+  if (!challenge || !progressForThisChallenge?.startedAt) return { days: 0, percent: 0 };
+
+  const start = new Date(progressForThisChallenge.startedAt);
+  const today = new Date();
+
+  const diffTime = today - start;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  const days = Math.max(diffDays, 0);
+  const progress = Math.min(
+    (diffDays / challenge.days) * 100,
+    100
+  );
+
+  return { days, percent: Math.max(progress, 0) };
+};
+
+  const { days: currentDay, percent: progressPercent } = calculateProgress();
+
+
+
+  //Calculate daily progress for challenge
+  const dailyProgressPercent = useMemo(() => {
+    const totalTasks = checkedItemsDaily.length;
     if (totalTasks === 0) return 0;
 
-    const completedCount =
-      checkedItemsDaily.filter(Boolean).length +
-      checkedItemsUnique.filter(Boolean).length;
+    const completedCount = checkedItemsDaily.filter(Boolean).length;
 
     return Math.min((completedCount / totalTasks) * 100, 100);
-  }, [checkedItemsDaily, checkedItemsUnique]);
+  }, [checkedItemsDaily, dailyToDos]);
+
+
+  //Calculate unique progress for challenge
+  const uniqueProgressPercent = useMemo(() => {
+    const totalTasks = checkedItemsDaily.length;
+    if (checkedItemsUnique.length === 0) return 0;
+
+    const completedCount = checkedItemsUnique.filter(Boolean).length;
+
+    return Math.min((completedCount / checkedItemsUnique.length) * 100, 100);
+  }, [checkedItemsUnique]);
+
+  const uniqueCompletedCount = checkedItemsUnique.filter(Boolean).length;
 
   // Placeholder value until field is added to MongoDB
   const totalCompleted = useMemo(() => {
@@ -200,7 +233,7 @@ const ChallengeDetails = ({ challengeJSON }) => {
       setLocalRegistered(true);
       setIsInputDisabled(false);
 
-      setMessage("Challenge registered!🥳");
+      setMessage("You successfully registered for the challenge!🥳");
       resetMessage();
 
       // ✅ best: refresh context so isRegisteredFromContext becomes true
@@ -257,9 +290,11 @@ const ChallengeDetails = ({ challengeJSON }) => {
                   <FaRegClock /> &nbsp; Duration: {challenge.days} days
                 </div>
 
-                <button onClick={handleJoinChallenge} disabled={isBtnDisabled}>
-                  {btnContent}
+                {!registered && (
+                <button onClick={handleJoinChallenge}>
+                  Join challenge
                 </button>
+                )}
 
                 {message && (
                   <p
@@ -275,19 +310,59 @@ const ChallengeDetails = ({ challengeJSON }) => {
 
                 {isAuthenticated && registered && (
                   <>
-                    <div className={style.progressSection}>
-                      <h3>Fortschritt</h3>
-
+                  <div className={style.progressSection}>
+                    <h3>Challenge Progress</h3>
+                    <div className={style.progressRow}>
                       <div className={style.progressBarWrapper}>
                         <div
                           className={style.progressBar}
-                          style={{ width: `${progressPercent}%` }}
-                        />
-                      </div>
-
+                          style={{ width: `${progressPercent}%` }} />
+                        </div>
+                      
+                      <p className={style.dayTag}>{currentDay} / {challenge.days} days</p>
+                    </div>
+                    </div>
+                  
+                    <div>
                       <p className={style.progressPercent}>
                         {Math.round(progressPercent)} %
                       </p>
+                    </div>
+
+                    <div className={style.todoProgress} >
+                    <div className={style.progressSection}>
+                      <h3>Daily To Do Progress</h3>
+                      <div className={style.dailyProgressSection}>
+                      <div className={style.progressCircle} style={{ "--progress": `${dailyProgressPercent}%` }}>
+                        <span className={style.progressCircleLabel}>
+                          {Math.round(dailyProgressPercent)} %
+                        </span>
+                      </div>
+                    </div>
+                    </div>
+
+                    <div className={style.progressSection}>
+                      <h3>Unique To Do Progress</h3>
+
+                      <div className={style.uniqueProgressSection}>
+                        <div className={style.uniqueDots}>
+                          {Array.from({ length: challenge.uniqueToDo.length }).map((_, index) => (
+                            <span
+                              key={index}
+                              className={
+                                index < uniqueCompletedCount
+                                  ? style.dotFilled
+                                  : style.dotEmpty
+                              }
+                            />
+                          ))}
+                        </div>
+
+                        <span className={style.uniqueLabel}>
+                          {uniqueCompletedCount} / {uniqueToDos.length}
+                        </span>
+                      </div>
+                    </div>
                     </div>
 
                     <div className={style.statsRow}>
@@ -303,13 +378,35 @@ const ChallengeDetails = ({ challengeJSON }) => {
 
                       <div className={style.stats}>
                         <div className={style.iconWrapper}>
+                          <FaStar color="#ecd165" size="32px" />
+                        </div>
+                        <div className={style.statsLabel}>
+                          <p>Points</p>
+                          <strong>{points}</strong>
+                        </div>
+                      </div>
+
+                      <div className={style.stats}>
+                        <div className={style.iconWrapper}>
                           <FaFire color="#BC8630" size="32px" />
                         </div>
                         <div className={style.statsLabel}>
-                          <p>Streak</p>
-                          <strong>{streak}</strong>
+                          <p>Current Streak</p>
+                          <strong>{currentStreak}</strong>
                         </div>
                       </div>
+
+                      <div className={style.stats}>
+                        <div className={style.iconWrapper}>
+                          <FaMeteor color="#864426" size="32px" />
+                        </div>
+                        <div className={style.statsLabel}>
+                          <p>Hightest Streak</p>
+                          <strong>{highestStreak}</strong>
+                        </div>
+                      </div>
+
+
                     </div>
                   </>
                 )}

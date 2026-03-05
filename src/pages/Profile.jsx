@@ -3,34 +3,54 @@ import { useAuth } from "../Context/AuthContext";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import styles from "../pages/Profile.module.css";
-import SuzieTeamImg from "../Assets/SuzieTeamImg.jpg";
-import SebastianTeamImg from "../Assets/SebastianTeamImg.jpg";
-import NasrTeamImg from "../Assets/NasrTeamImg.jpg";
-import BibekTeamImg from "../Assets/BibekTeamImg.jpg";
+import AvatarBee from "../assets/AvatarBee.png";
+import AvatarButterfly from "../assets/AvatarButterfly.png";
+import AvatarFish from "../assets/AvatarFish.png";
+import AvatarStarfish from "../assets/AvatarStarfish.png";
+import AvatarTiger from "../assets/AvatarTiger.png";
 
 const Profile = () => {
-  const [email, setEmail] = useState("bibek@gmail.com");
-  const [firstName, setFirstName] = useState("Bibek");
-  const [lastName, setLastName] = useState("Pant");
-  const [userId, setUserId] = useState("pantbibek21");
-  const [userImage, setUserImage] = useState(BibekTeamImg);
-  const [previewUrl, setPreviewUrl] = useState("");
-  const [imgUploadMessage, setImgUploadMessage] = useState("");
+  
+  const { user } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userImage, setUserImage] = useState(AvatarBee);
+  const [previewUrl, setPreviewUrl] = useState(""); 
+  const [imgUploadMessage, setImgUploadMessage] = useState(""); 
   const [formSubmissonMessage, setFormSubmissionMessage] = useState("");
 
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (!(userImage instanceof Blob)) {
+    if (user) {
+      setEmail(user.email);
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setUserName(user.userName);
+      setUserImage(user.profilePicture || AvatarBee);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (!userImage) {
       setPreviewUrl("");
       return;
     }
 
-    const url = URL.createObjectURL(userImage);
-    setPreviewUrl(url);
+    if (userImage instanceof File || userImage instanceof Blob) {
+      const url = URL.createObjectURL(userImage);
+      setPreviewUrl(url);
 
-    return () => URL.revokeObjectURL(url);
+      return () => URL.revokeObjectURL(url);
+    }
+
+    setPreviewUrl("");
   }, [userImage]);
+
+
   const onFileChange = (e) => {
     const file = e.target.files?.[0] ?? null;
     setUserImage(file);
@@ -47,9 +67,9 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <div class={styles.container}>
+      <div className={styles.container}>
         {isAuthenticated && (
-          <div class={styles.formWrapper}>
+          <div className={styles.formWrapper}>
             <div className={styles.introContent}>
               <h2 className={styles.heading}>Profile</h2>
               <p>
@@ -87,12 +107,12 @@ const Profile = () => {
                 />
               </div>
               <div className={styles.formField}>
-                <label htmlFor="userId">User ID:</label>
+                <label htmlFor="userName">Username:</label>
                 <input
                   type="text"
-                  id="userId"
-                  value={userId}
-                  onChange={(e) => setUserId(e.target.value)}
+                  id="userName"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </div>
               <h2
@@ -122,44 +142,37 @@ const Profile = () => {
               </div>
 
               <h3 className={styles.subHeading}>Choose your EcoQuest avatar</h3>
-              <form></form>
 
               <div className={styles.avatarSection}>
                 <div
                   className={styles.avatarWrapper}
-                  onClick={() => setUserImage(SebastianTeamImg)}
+                  onClick={() => setUserImage(AvatarBee)}
                 >
-                  <img src={SebastianTeamImg} alt="" />
+                  <img src={AvatarBee} alt="" />
                 </div>
                 <div
                   className={styles.avatarWrapper}
-                  onClick={() => setUserImage(NasrTeamImg)}
+                  onClick={() => setUserImage(AvatarButterfly)}
                 >
-                  <img src={NasrTeamImg} alt="" />
+                  <img src={AvatarButterfly} alt="" />
                 </div>
                 <div
                   className={styles.avatarWrapper}
-                  onClick={() => setUserImage(SuzieTeamImg)}
+                  onClick={() => setUserImage(AvatarFish)}
                 >
-                  <img src={SuzieTeamImg} alt="" />
+                  <img src={AvatarFish} alt="" />
                 </div>
                 <div
                   className={styles.avatarWrapper}
-                  onClick={() => setUserImage(SuzieTeamImg)}
+                  onClick={() => setUserImage(AvatarStarfish)}
                 >
-                  <img src={SuzieTeamImg} alt="" />
+                  <img src={AvatarStarfish} alt="" />
                 </div>
                 <div
                   className={styles.avatarWrapper}
-                  onClick={() => setUserImage(SuzieTeamImg)}
+                  onClick={() => setUserImage(AvatarTiger)}
                 >
-                  <img src={SuzieTeamImg} alt="" />
-                </div>
-                <div
-                  className={styles.avatarWrapper}
-                  onClick={() => setUserImage(SuzieTeamImg)}
-                >
-                  <img src={SuzieTeamImg} alt="" />
+                  <img src={AvatarTiger} alt="" />
                 </div>
               </div>
 

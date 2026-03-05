@@ -71,9 +71,15 @@ if (response.ok) {
 
   const userId = data.userId ?? data.user?.userId;
   const userName = data.userName ?? data.user?.userName;
+  const email = data.email ?? data.user?.email;
+  const firstName = data.firstName ?? data.user?.firstName;
+  const lastName = data.lastName ?? data.user?.lastName;
 
   console.log("Extracted userId:", userId);
   console.log("Extracted userName:", userName);
+  console.log("Extracted email:", email);
+  console.log("Extracted firstName:", firstName);
+  console.log("Extracted lastName:", lastName);
 
   if (!userId) {
     setLoginMessage("Login response missing userId.");
@@ -83,6 +89,9 @@ if (response.ok) {
   login({
     userName,
     userId,
+    email,
+    firstName,
+    lastName,
   });
 
   await fetchUserProgress(userId);
